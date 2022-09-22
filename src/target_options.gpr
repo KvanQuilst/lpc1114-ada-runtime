@@ -1,0 +1,32 @@
+abstract project Target_Options is
+
+  type Build_Type is ("Production", "Debug", "Assert", "Gnatcov");
+  Build : Build_Type := external ("BUILD", "Production");
+
+  COMFLAGS := ("");
+  COMGNARLFLAGS := ("");
+
+  ADAFLAGS := ("-gnatg", "-nostdinc", "-fno-delete-null-pointer-checks");
+  ASMFLAGS := ("");
+  CFLAGS := ("-Werror", "-Wall");
+  case Build is
+    when "Production" =>
+      COMFLAGS := COMFLAGS & ("-O2");
+      ADAFLAGS := ADAFLAGS & ("-gnatp", "-gnatn2");
+    when "Debug" =>
+      COMFLAGS := COMFLAGS & ("-O0", "-g");
+      ASMFLAGS := ASMFLAGS & ("-g");
+    when "Assert" =>
+      COMFLAGS := COMFLAGS & ("-O");
+      ADAFLAGS := ASMFLAGS & ("-g");
+    when "Gnatcov" =>
+      COMFLAGS := COMFLAGS & ("-O0", "-g", "-fdump-scos",
+                              "-fpreserved-control-flow");
+  end case;
+
+  ALL_ADAFLAGS := ADAFLAGS & COMFLAGS;
+  ALL_CFLAGS := CFLAGS & COMFLAGS;
+  GNARL_ADAFLAGS := ALL_ADAFLAGS & COMGNARLFLAGS;
+  GNARL_CFLAGS := ALL_CFLAGS & COMGNARLFLAGS;
+
+end Target_Options;
