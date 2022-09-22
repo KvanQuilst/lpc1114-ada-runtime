@@ -7,3 +7,10 @@
 *.stderr
 *.stdout
 *~
+*.cswi
+*-loc.xml
+b__*.ad[bs]
+.#*
+obj
+install
+gnatinspect.db
