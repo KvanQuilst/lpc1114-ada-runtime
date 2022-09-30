@@ -15,8 +15,8 @@ package Interfaces.LPC1114.SYSCON is
   -- System Memory Remap Register
   type SYSMEMREMAP_Register is record
     -- MAP
-    MAP : SYSMEMREMAP_MAP := 16#10#;
-    Reserved_2_31 : Interface.LPC1114.UInt30 := 16#0#;
+    MAP : SYSMEMREMAP_MAP := 2#10#;
+    Reserved_2_31 : Interface.LPC1114.UInt30 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -35,7 +35,7 @@ package Interfaces.LPC1114.SYSCON is
     I2C_RST_N : PRESETCTRL_RST_N := 0;
     SSP1_RST_N : PRESETCTRL_RST_N := 0;
     CAN_RST_N : PRESETCTRL_RST_N := 0;
-    Reserved_4_31 : Interface.LPC1114.UInt28 := 16#0#;
+    Reserved_4_31 : Interface.LPC1114.UInt28 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -54,9 +54,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- System PLL Control Register
   type SYSPLLCTRL_Register is record
-    MSEL : SYSPLLCTRL_MSEL := 16#0#;
-    PSEL : SYSPLLCTRL_PSEL := 16#0#;
-    Reserved_7_31 : Interface.LPC1114.UInt25 := 16#0#;
+    MSEL : SYSPLLCTRL_MSEL := 2#0#;
+    PSEL : SYSPLLCTRL_PSEL := 2#0#;
+    Reserved_7_31 : Interface.LPC1114.UInt25 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -73,8 +73,8 @@ package Interfaces.LPC1114.SYSCON is
   -- System PLL Status Register
   type SYSPLLSTAT_Register is record
     -- READ-ONLY
-    LOCK : SYSPLLSTAT_LOCK := 16#0#;
-    Reserved_1_31 : Interface.LPC1114.UInt31 := 16#0#;
+    LOCK : SYSPLLSTAT_LOCK := 2#0#;
+    Reserved_1_31 : Interface.LPC1114.UInt31 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -90,9 +90,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- System Oscillator Control Register
   type SYSOSCCTRL_Register is record
-    BYPASS : SYSOSCCTRL_BYPASS : 16#0#;
-    FREQRANGE : SYSOSCCTRL_FREQRANGE : 16#0#;
-    Reserved_2_31 : Interface.LPC1114.UInt30 := 16#0#;
+    BYPASS : SYSOSCCTRL_BYPASS : 2#0#;
+    FREQRANGE : SYSOSCCTRL_FREQRANGE : 2#0#;
+    Reserved_2_31 : Interface.LPC1114.UInt30 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -108,9 +108,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Watchdog Oscillator Control Register
   type SYSOSCCTRL_Register is record
-    DIVSEL : WDTOSCCTRL_DIVSEL : 16#0#;
-    FREQSEL : WDTOSSCTRL_FREQSEL : 16#0#;
-    Reserved_9_31 : Interface.LPC1114.UInt23 := 16#0#;
+    DIVSEL : WDTOSCCTRL_DIVSEL : 2#0#;
+    FREQSEL : WDTOSSCTRL_FREQSEL : 2#0#;
+    Reserved_9_31 : Interface.LPC1114.UInt23 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -126,14 +126,14 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Internal Resonant Crystal Control Register
   type IRCCTRL_Register is record
-    TRIM : IRCCTRL_TRIM := 16#10000000#;
-    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#0#;
+    TRIM : IRCCTRL_TRIM := 2#10000000#;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
   for IRCCTRL_Register use record
-    TRIM at 16#10000000# range 0..7;
+    TRIM at 2#10000000# range 0..7;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record;
 
@@ -143,16 +143,16 @@ package Interfaces.LPC1114.SYSCON is
   -- System Reset Status Register
   type SYSRSTSTAT_Register is record
     -- POR Reset Status
-    POR : SYSRSTSTAT_RST := 16#0#;
+    POR : SYSRSTSTAT_RST := 2#0#;
     -- External RESET Pin Status
-    EXTRST : SYSRSTSTAT_RST := 16#0#;
+    EXTRST : SYSRSTSTAT_RST := 2#0#;
     -- Watchdog Reset Status
-    WDT : SYSRSTSTAT_RST := 16#0#;
+    WDT : SYSRSTSTAT_RST := 2#0#;
     -- Brown-out Detect Reset Status
-    BOD : SYSRSTSTAT_RST := 16#0#;
+    BOD : SYSRSTSTAT_RST := 2#0#;
     -- Software System Reset Status
-    SYSRST : SYSRSTSTAT_RST := 16#0#;
-    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 16#0#;
+    SYSRST : SYSRSTSTAT_RST := 2#0#;
+    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -171,8 +171,8 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Generic System Clock Select Register
   type SYS_CLKSEL is record
-    SEL : SYS_CLKSEL_SEL := 16#0#;
-    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 16#0#;
+    SEL : SYS_CLKSEL_SEL := 2#0#;
+    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -191,8 +191,8 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Generice Enable Register
   type SYS_CLKUEN is record
-    ENA : SYS_ENA := 16#0#;
-    Reserved_1_31 : Interfaces.LPC1114.UInt31 := 16#0#;
+    ENA : SYS_ENA := 2#0#;
+    Reserved_1_31 : Interfaces.LPC1114.UInt31 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -219,8 +219,8 @@ package Interfaces.LPC1114.SYSCON is
   -- Generic System Clock Divider
   type SYS_CLKDIV is record
     -- SPI0_PCLK clock Divider
-    DIV : SYS_DIV := 16#0#;
-    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#0#;
+    DIV : SYS_DIV := 2#0#;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -238,43 +238,43 @@ package Interfaces.LPC1114.SYSCON is
   -- System ABH Clock Control Register
   type SYSAHBCLKCTRL_Register is record
     -- READ-ONLY -- Enables AHB to multiple components
-    SYS : SYS_ENA := 16#1#;
+    SYS : SYS_ENA := 2#1#;
     -- Enable Clock for ROM
-    ROM : SYS_ENA := 16#1#;
+    ROM : SYS_ENA := 2#1#;
     -- Enable Clock for RAM
-    RAM : SYS_ENA := 16#1#;
+    RAM : SYS_ENA := 2#1#;
     -- Enable clock for Flash Register Interface
-    FLASHREG : SYS_ENA := 16#1#;
+    FLASHREG : SYS_ENA := 2#1#;
     -- Enable clock for Flash Array Access
-    FLASHARRAY : SYS_ENA := 16#1#;
+    FLASHARRAY : SYS_ENA := 2#1#;
     -- Enable clock for I2C
-    I2C : SYS_ENA := 16#0#;
+    I2C : SYS_ENA := 2#0#;
     -- Enable clock for GPIO
-    GPIO : SYS_ENA := 16#1#;
+    GPIO : SYS_ENA := 2#1#;
     -- Enable clock for CT16B0
-    CT16B0 : SYS_ENA := 16#0#;
+    CT16B0 : SYS_ENA := 2#0#;
     -- Enable clock for CT1b1
-    CT16B1 : SYS_ENA := 16#0#;
+    CT16B1 : SYS_ENA := 2#0#;
     -- Enable clock for CT32B0
-    CT32B0 : SYS_ENA := 16#0#;
+    CT32B0 : SYS_ENA := 2#0#;
     -- Enable clock for CT32B1
-    CT32B1 : SYS_ENA := 16#0#;
+    CT32B1 : SYS_ENA := 2#0#;
     -- Enable clock for SPI0
-    SSP0 : SYS_ENA := 16#1#;
+    SSP0 : SYS_ENA := 2#1#;
     -- Enable clock for UART
-    UART : SYS_ENA := 16#0#;
+    UART : SYS_ENA := 2#0#;
     -- Enable clock for ADC
-    ADC : SYS_ENA := 16#0#;
-    Reserved_14_14 : Interfaces.LPC1114.Bit := 16#0#;
+    ADC : SYS_ENA := 2#0#;
+    Reserved_14_14 : Interfaces.LPC1114.Bit := 2#0#;
     -- Enable clock for WDT
-    WDT : SYS_ENA := 16#0#;
+    WDT : SYS_ENA := 2#0#;
     -- Enable clock for IOCON
-    ICOCON : SYS_ENA := 16#0#;
+    ICOCON : SYS_ENA := 2#0#;
     -- Enable clock for CAN
-    CAN : SYS_ENA := 16#0#;
+    CAN : SYS_ENA := 2#0#;
     -- Enable clocck for SPI1
-    SSP1 : SYS_ENA := 16#0#;
-    Reserved_19_31 : Interfaces.LPC1114.UInt13 := 16#0#;
+    SSP1 : SYS_ENA := 2#0#;
+    Reserved_19_31 : Interfaces.LPC1114.UInt13 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -397,10 +397,10 @@ package Interfaces.LPC1114.SYSCON is
 
   -- BOD Control Register
   type BODCTRL_Register is record
-    BODRSTLEV : BODCTRL_BODRSTLEV := 16#0#;
-    BODINTVAL : BODCTRL_BODINTVAL := 16#0#;
-    BODRSTENA : BODCTRL_BODRSTENA := 16#0#;
-    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 16#0#;
+    BODRSTLEV : BODCTRL_BODRSTLEV := 2#0#;
+    BODINTVAL : BODCTRL_BODINTVAL := 2#0#;
+    BODRSTENA : BODCTRL_BODRSTENA := 2#0#;
+    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -434,9 +434,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- NMI Source Selection Register
   type NMISRC_Register is record
-    IRQNO : NMISRC_IRQNO := 16#0#;
+    IRQNO : NMISRC_IRQNO := 2#0#;
     Reserved_5_30 : Interfaces.LPC1114.UInt26;
-    NMIEN : NMISRC_NMIEN := 16#0#;
+    NMIEN : NMISRC_NMIEN := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -453,9 +453,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Start Logic Edge Control Register 0
   type STARTAPRP0_Register is record
-    APRPIO0_n : STARTAPRP_APRPIO0 := 16#0#;
-    APRPIO1_0 : STARTAPRP_APRPIO1_0 := 16#0#;
-    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
+    APRPIO0_n : STARTAPRP_APRPIO0 := 2#0#;
+    APRPIO1_0 : STARTAPRP_APRPIO1_0 := 2#0#;
+    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -472,10 +472,10 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Start Logic Signal Enable Register 0
   type STARTERP0_Register is record
-    ERPIO0_n : STARTERP_ERPIO0 := 16#0#;
-    ERPIO1_0 : STARTERP_ERPIO1 := 16#0#;
+    ERPIO0_n : STARTERP_ERPIO0 := 2#0#;
+    ERPIO1_0 : STARTERP_ERPIO1 := 2#0#;
     -- DO NOT WRITE A 1 TO RESERVED BITS IN THIS REGISTER
-    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
+    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -532,18 +532,18 @@ package Interfaces.LPC1114.SYSCON is
 
   type PDSLEEPCFG_Register is record
     -- Always write these bits as 111
-    NOTUSED0 : Interfaces.LPC1114.UInt3 := 16#0#;
-    BOD_PD : SYS_PD := 16#0#;
+    NOTUSED0 : Interfaces.LPC1114.UInt3 := 2#0#;
+    BOD_PD : SYS_PD := 2#0#;
     -- Always write these bits as 11
-    NOTUSED1 : Interfaces.LPC1114.UInt2 := 16#0#;
-    WDTOSC_PD : SYS_PD := 16#0#;
+    NOTUSED1 : Interfaces.LPC1114.UInt2 := 2#0#;
+    WDTOSC_PD : SYS_PD := 2#0#;
     -- Always write this bit as 1
-    NOTUSED2 : Interfaces.LPC1114.Bit := 16#0#;
+    NOTUSED2 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write these bits as 000
-    NOTUSED3 : Interfaces.LPC1114.UInt3 := 16#0#;
+    NOTUSED3 : Interfaces.LPC1114.UInt3 := 2#0#;
     -- Always write these bits as 11
-    NOTUSED4 : Interfaces.LPC1114.UInt2 := 16#0#;
-    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
+    NOTUSED4 : Interfaces.LPC1114.UInt2 := 2#0#;
+    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -562,26 +562,26 @@ package Interfaces.LPC1114.SYSCON is
   
   -- Wake-up Configuration Register
   type PDAWAKECFG_Register is record
-    IRCOUT_PD : SYS_PD := 16#0#;
-    IRC_PD : SYS_PD := 16#0#;
-    FLASH_PD : SYS_PD := 16#0#:
-    BOD_PD : SYS_PD := 16#0#;
-    ADC_PD : SYS_PD := 16#1#;
-    SYSOSC_PD : SYS_PD := 16#1#;
-    WDTOSC_PD : SYS_PD := 16#1#;
-    SYSPLL_PD : SYS_PD := 16#1#;
+    IRCOUT_PD : SYS_PD := 2#0#;
+    IRC_PD : SYS_PD := 2#0#;
+    FLASH_PD : SYS_PD := 2#0#:
+    BOD_PD : SYS_PD := 2#0#;
+    ADC_PD : SYS_PD := 2#1#;
+    SYSOSC_PD : SYS_PD := 2#1#;
+    WDTOSC_PD : SYS_PD := 2#1#;
+    SYSPLL_PD : SYS_PD := 2#1#;
     -- Always write this bit as 1
-    Reserved_8 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_8 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0
-    Reserved_9 : Interfaces.LPC1114.Bit := 16#0#;
+    Reserved_9 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write this bit as 1
-    Reserved_10 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_10 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 1
-    Reserved_11 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_11 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0
-    Reserved_12 : Interfaces.LPC1114.Bit := 16#0#;
+    Reserved_12 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write these bits as 111
-    Reserved_13_15 : Interfaces.LPC1114.UInt3 := 16#111#;
+    Reserved_13_15 : Interfaces.LPC1114.UInt3 := 2#111#;
     Reserved_16_31 : Interfaces.LPC1114.UInt16;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -608,26 +608,26 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Power-down Configuration Register
   type PDRUNCFG_Register is record
-    IRCOUT_PD : SYS_PD := 16#0#;
-    IRC_PD : SYS_PD := 16#0#;
-    FLASH_PD : SYS_PD := 16#0#:
-    BOD_PD : SYS_PD := 16#0#;
-    ADC_PD : SYS_PD := 16#1#;
-    SYSOSC_PD : SYS_PD := 16#1#;
-    WDTOSC_PD : SYS_PD := 16#1#;
-    SYSPLL_PD : SYS_PD := 16#1#;
+    IRCOUT_PD : SYS_PD := 2#0#;
+    IRC_PD : SYS_PD := 2#0#;
+    FLASH_PD : SYS_PD := 2#0#:
+    BOD_PD : SYS_PD := 2#0#;
+    ADC_PD : SYS_PD := 2#1#;
+    SYSOSC_PD : SYS_PD := 2#1#;
+    WDTOSC_PD : SYS_PD := 2#1#;
+    SYSPLL_PD : SYS_PD := 2#1#;
     -- Always write this bit as 1
-    Reserved_8 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_8 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0
-    Reserved_9 : Interfaces.LPC1114.Bit := 16#0#;
+    Reserved_9 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write this bit as 1
-    Reserved_10 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_10 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 1
-    Reserved_11 : Interfaces.LPC1114.Bit := 16#1#;
+    Reserved_11 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0
-    Reserved_12 : Interfaces.LPC1114.Bit := 16#0#;
+    Reserved_12 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write these bits as 111
-    Reserved_13_15 : Interfaces.LPC1114.UInt3 := 16#111#;
+    Reserved_13_15 : Interfaces.LPC1114.UInt3 := 2#111#;
     Reserved_16_31 : Interfaces.LPC1114.UInt16;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -768,5 +768,8 @@ package Interfaces.LPC1114.SYSCON is
     Reserved13    at 16#23C# range 0..31;
     DEVICE_ID     at 16#3F4# range 0..31;
   end record;
+
+  SYSCON_Block : aliased SYSCON
+    with Import, Address => SYSCON_Base;
 
 end Interfaces.LPC1114.SYSCON;
