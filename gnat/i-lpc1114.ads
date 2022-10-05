@@ -87,7 +87,7 @@ package Interfaces.LPC1114 is
   CT32B0_Base : constant System.Address := System'To_Address (16#40014000#);
   CT32B1_Base : constant System.Address := System'To_Address (16#40018000#);
   WDT_Base : constant System.Address := System'To_Address (16#40004000#);
-  SysTick_Base : constant System.Address := System'To_Address (16#E000E000#);
+  SYST_Base : constant System.Address := System'To_Address (16#E000E000#);
   ADC_Base : constant System.Address := System'To_Address (16#4001C000#);
   IOCON_Base : constant System.Address := System'To_Address (16#40044000#);
   SYSCON_Base : constant System.Addresss := System'To_Address (16#40048000#);
