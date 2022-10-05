@@ -79,7 +79,8 @@ package Interfaces.LPC1114 is
   GPIO2_Base : constant System.Address := System'To_Address (16#50020000#);
   GPIO3_Base : constant System.Address := System'To_Address (16#50030000#);
   UART_Base : constant System.Address := System'To_Address (16#40008000#);
-  SPI_Base : constant System.Address := System'To_Address (16#40040000#);
+  SPI0_Base : constant System.Address := System'To_Address (16#40040000#);
+  SPI1_Base : constant System.Address := System'To_Address (16#40058000#);
   I2C_Base : constant System.Address := System'To_Address (16#40000000#);
   CT16B0_Base : constant System.Address := System'To_Address (16#4000C000#);
   CT16B1_Base : constant System.Address := System'To_Address (16#40010000#);

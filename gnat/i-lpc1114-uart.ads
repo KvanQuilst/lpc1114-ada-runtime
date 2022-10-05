@@ -9,14 +9,14 @@ package Interfaces.LPC1114.UART is
   subtype U0RBR_RBR_Field is Interfaces.LPC1114.Byte;
 
   -- UART Receiver Buffer Register
-  type U0RBR is record
+  type U0RBR_Register is record
     RBR : U0RBR_RBR_Field;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0RBR use record
+  for U0RBR_Register use record
     RPR at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -25,14 +25,14 @@ package Interfaces.LPC1114.UART is
   subtype U0THR_THR_Field is Interfaces.LPC1114.Byte;
 
   -- UART Transmitter Holding Register
-  type U0THR is record
+  type U0THR_Register is record
     THR : U0THR_THR_Field;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0THR use record
+  for U0THR_Register use record
     THR at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -41,14 +41,14 @@ package Interfaces.LPC1114.UART is
   subtype U0DLL_DLLSB_Field is Interfaces.LPC1114.Byte;
 
   -- UART Divisor Latch LSB Register
-  type U0DLL is record
+  type U0DLL_Register is record
     DLLSB : U0DLL_DLLSB_Field := 2#01#;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0DLL use record
+  for U0DLL_Register use record
     DLLSB at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -57,14 +57,14 @@ package Interfaces.LPC1114.UART is
   subtype U0DLM_DLMSB_Field is Interfaces.LPC1114.Byte;
 
   -- UART Divisor Latch MSB Register
-  type U0DLM is record
+  type U0DLM_Register is record
     DLMSB : U0DLM_DLLSB_Field := 2#00#;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0DLM use record
+  for U0DLM_Register use record
     DLMSB at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -77,7 +77,7 @@ package Interfaces.LPC1114.UART is
   subtype U0IER_ABTOINTEN_Field is Interfaces.LPC1114.Bit;
   
   -- UART Interrupt Enable Register
-  type U0IER is record
+  type U0IER_Register is record
     RBRIE : U0IER_RBRIE_Field := 0;
     THREIE : U0IER_THREIE_Field := 0;
     RXLIE : U0IER_RXLIE_Field := 0;
@@ -93,7 +93,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0IER use record
+  for U0IER_Register use record
     RBRIE at 0 range 0..0;
     THREIE at 0 range 1..1;
     RXLIE at 0 range 2..2;
@@ -113,7 +113,7 @@ package Interfaces.LPC1114.UART is
   subtype U0IIR_ABTOINT_Field is Interfaces.LPC1114.Bit;
 
   -- UART Interrupt Identification Register
-  type U0IIR is record
+  type U0IIR_Register is record
     INTSTATUS : U0IIR_INTSTATUS_Field := 1;
     INTID : U0IIR_INTID_Field := 0;
     -- DO NOT WRITE 1s TO THESE BITS
@@ -127,7 +127,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0IIR use record
+  for U0IIR_Register use record
     INTSTATUS at 0 range 0..0;
     INTID at 0 range 1..3;
     Reserved_4_5 at 0 range 4..5;
@@ -144,7 +144,7 @@ package Interfaces.LPC1114.UART is
   subtype U0FCR_RXTL_Field is Interfaces.LPC1114.UInt2;
 
   -- UART FIFO Control Register
-  type U0FCR is record
+  type U0FCR_Register is record
     FIFOEN : U0FCR_FIFOEN_Field := 0;
     RXFIFORES : U0FCR_RXFIFORES_Field := 0;
     TXFIFORES : U0FCR_TXFIFORES_Field := 0;
@@ -157,7 +157,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0FCR use record
+  for U0FCR_Register use record
     FIFOEN at 0 range 0..0;
     RXFIFORES at 0 range 1..1;
     TXFIFORES at 0 range 2..2;
@@ -176,7 +176,7 @@ package Interfaces.LPC1114.UART is
   subtype U0LCR_DLAB_Field is Interfaces.LPC1114.Bit;
 
   -- UART Line Control Regsiter
-  type U0LCR is record
+  type U0LCR_Register is record
     WLS : U0LCR_WLS_Field := 0;
     SBS : U0LCR_SBS_Field := 0;
     PE : U0LCR_PE_Field := 0;
@@ -188,7 +188,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0LCR use record
+  for U0LCR_Register use record
     WLS at 0 range 0..1;
     SBS at 0 range 2..2;
     PE at 0 range 3..3;
@@ -206,7 +206,7 @@ package Interfaces.LPC1114.UART is
   subtype U0MCR_CTSEN_Field is Interfaces.LPC1114.Bit;
 
   -- UART Modem Control Regsiter
-  type U0MCR is record
+  type U0MCR_Register is record
     DTRC : U0MCR_DTRC_Field := 0;
     RTSC : U0MCR_RTSC_Field := 0;
     -- DO NOT WRITE 1s TO THESE BITS
@@ -221,7 +221,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0MCR use record
+  for U0MCR_Register use record
     DTRC at 0 range 0..0;
     RTSC at 0 range 1..1;
     Reserved_2_3 at 0 range 2..3;
@@ -243,7 +243,7 @@ package Interfaces.LPC1114.UART is
   subtype U0LSR_RXFE_Field is Interfaces.LPC1114.Bit;
 
   -- UART Line Status Regsiter
-  type U0LSR is record
+  type U0LSR_Register is record
     RDR : U0LSR_RDR_Field := 0;
     OE : U0LSR_OE_Field := 0;
     PE : U0LSR_PE_Field := 0;
@@ -257,7 +257,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0LSR use record
+  for U0LSR_Register use record
     RDR at 0 range 0..0;
     OE at 0 range 1..1;
     PE at 0 range 2..2;
@@ -280,7 +280,7 @@ package Interfaces.LPC1114.UART is
   subtype U0MSR_DCD_Field is Interfaces.LPC1114.Bit;
 
   -- UART Modem Status Register
-  type U0MSR is record
+  type U0MSR_Register is record
     DCTS : U0MSR_DCTS_Field := 0;
     DDSR : U0MSR_DDSR_Field := 0;
     TERI : U0MSR_TERI_Field := 0;
@@ -294,7 +294,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0MSR use record
+  for U0MSR_Register use record
     DCTS at 0 range 0..0;
     DDSR at 0 range 1..1;
     TERI at 0 range 2..2;
@@ -310,14 +310,14 @@ package Interfaces.LPC1114.UART is
   subtype U0SCR_Pad_Field is Interfaces.LPC1114.Byte;
 
   -- UART Scratch Pad RegsiterA
-  type U0SCR is record
+  type U0SCR_Register is record
     Pad : U0SCR_Pad_Field := 16#00#;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0SCR use record
+  for U0SCR_Register use record
     Pad at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -330,7 +330,7 @@ package Interfaces.LPC1114.UART is
   subtype U0ACR_ABTOINTCLR_Field is Interfaces.LPC1114.Bit;
 
   -- UART Auto-baud Control Register
-  type U0ACR is record
+  type U0ACR_Register is record
     START : U0ARC_START_Field := 0;
     MODE : U0ARC_MODE_Field := 0;
     AUTORESTART : U0ARC_AUTORESTART_Field := 0;
@@ -344,7 +344,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0ACR use record
+  for U0ACR_Register use record
     START at 0 range 0..0;
     MODE at 0 range 1..1;
     AUTORESTART at 0 range 2..2;
@@ -359,7 +359,7 @@ package Interfaces.LPC1114.UART is
   subtype U0FDR_MULVAL_Field is Interfaces.LPC1114.UInt4;
 
   -- UART Fractional Divider Register
-  type U0FDR is record
+  type U0FDR_Register is record
     DIVADDVAL : U0FDR_DIVADDVCAL_Field := 0;
     MULVAL : U0FDR_MULVAL_Field := 1;
     -- DO NOT WRITE 1s TO THESE BITS
@@ -368,7 +368,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0FDR use record
+  for U0FDR_Register use record
     DIVADDVAL at 0 range 0..3;
     MULVAL at 0 range 4..7;
     Reserved_8_31 at 0 range 8..31;
@@ -378,7 +378,7 @@ package Interfaces.LPC1114.UART is
   subtype U0TER_TXEN_Field is Interfaces.LPC1114.Bit;
 
   -- UART Transmit Enable Regsiter
-  type U0TER is record
+  type U0TER_Register is record
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_0_6 : Interfaces.LPC1114.UInt7;
     TXEN : U0TER_TXEN_Field := 1;
@@ -387,7 +387,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0TER use record
+  for U0TER_Register use record
     Reserved_0_6 at 0 range 0..6;
     TXEN at 0 range 7..7;
     Reserved_8_31 at 0 range 8..31;
@@ -401,7 +401,7 @@ package Interfaces.LPC1114.UART is
   subtype U0RS485CTRL_OINV_Field is Interfaces.LPC1114.Bit;
 
   -- UART RS485 Control Register
-  type U0RS485CTRL is record
+  type U0RS485CTRL_Register is record
     NMMEN : U0RS485CTRL_NMMEN_Field := 0;
     RXDIS : U0RS485CTRL_RXDIS_Field := 0;
     AADEN : U0RS485CTRL_AADEN_Field := 0;
@@ -414,7 +414,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0RS485CTRL use record
+  for U0RS485CTRL_Register use record
     NMMEN at 0 range 0..0;
     RXDIS at 0 range 1..1;
     AADEN at 0 range 2..2;
@@ -428,14 +428,14 @@ package Interfaces.LPC1114.UART is
   subtype U0RS485ADRMATCH_ADRMATCH_Field is Interfaces.LPC1114.Byte;
 
   -- UART RS485 Address Match Register
-  type U0RS485ADRMATCH is record
+  type U0RS485ADRMATCH_Register is record
     ADRMATCH : U0RS485ADRMATCH_ADRMATCH_Field := 16#00#;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0RS485ADRMATCH use record
+  for U0RS485ADRMATCH_Register use record
     ADRMATCH at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -443,8 +443,8 @@ package Interfaces.LPC1114.UART is
 
   subtype U0RS485DLY_DLY_Field is Interfaces.LPC1114.Byte;
 
-  -- UART RS485 Address Match Register
-  type U0RS485DLY is record
+  -- UART RS485 Delay Value Register
+  type U0RS485DLY_Register is record
     DLY : U0RS485DLY_DLY_Field := 16#00#;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
@@ -452,7 +452,7 @@ package Interfaces.LPC1114.UART is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for U0RS485DLY use record
+  for U0RS485DLY_Register use record
     DLY at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
