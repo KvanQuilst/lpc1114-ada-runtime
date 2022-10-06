@@ -10,17 +10,17 @@ package Interfaces.LPC1114.GPIO is
   -- Registers --
   ---------------
 
-  subtype GPIO_DATA   is Interfaces.LPC1114.UInt12;
-  subtype GPIO_IO     is Interfaces.LPC1114.UInt12;
-  subtype GPIO_ISENSE is Interfaces.LPC1114.UInt12;
-  subtype GPIO_IBE    is Interfaces.LPC1114.UInt12;
-  subtype GPIO_IEV    is Interfaces.LPC1114.UInt12;
-  subtype GPIO_MASK   is Interfaces.LPC1114.UInt12;
-  subtype GPIO_RAWST  is Interfaces.LPC1114.UInt12;
-  subtype GPIO_CLR    is Interfaces.LPC1114.UInt12;
+  subtype GPIO_DATA_Field   is Interfaces.LPC1114.UInt12;
+  subtype GPIO_IO_Field     is Interfaces.LPC1114.UInt12;
+  subtype GPIO_ISENSE_Field is Interfaces.LPC1114.UInt12;
+  subtype GPIO_IBE_Field    is Interfaces.LPC1114.UInt12;
+  subtype GPIO_IEV_Field    is Interfaces.LPC1114.UInt12;
+  subtype GPIO_MASK_Field   is Interfaces.LPC1114.UInt12;
+  subtype GPIO_RAWST_Field  is Interfaces.LPC1114.UInt12;
+  subtype GPIO_CLR_Field    is Interfaces.LPC1114.UInt12;
 
   type GPIODATA_Register is record
-    DATA : GPIO_DATA;
+    DATA : GPIO_DATA_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -33,7 +33,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIODIR_Register is record
-    IO : GPIO_IO := 16#00#;
+    IO : GPIO_IO_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -46,7 +46,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIS_Register is record
-    ISENSE : GPIO_ISENSE := 16#00#;
+    ISENSE : GPIO_ISENSE_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -59,7 +59,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIBE_Register is record
-    IBE : GPIO_IBE := 16#00#;
+    IBE : GPIO_IBE_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -72,7 +72,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIEV_Register is record
-    IEV : GPIO_IEV := 16#00#;
+    IEV : GPIO_IEV_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -85,7 +85,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIE_Register is record
-    MASK : GPIO_MASK := 16#00#;
+    MASK : GPIO_MASK_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -99,7 +99,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- READ ONLY --
   type GPIORIS_Register is record
-    RAWST : GPIO_RAWST := 16#00#;
+    RAWST : GPIO_RAWST_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -113,7 +113,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- READ ONLY --
   type GPIOMIS_Register is record
-    MASK : GPIO_MASK := 16#00#;
+    MASK : GPIO_MASK_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -127,7 +127,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- WRITE ONLY --
   type GPIOIC_Register is record
-    CLR : GPIO_CLR := 16#00#;
+    CLR : GPIO_CLR_Field := 16#00#;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,

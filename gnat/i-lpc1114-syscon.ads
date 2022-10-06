@@ -10,12 +10,12 @@ package Interfaces.LPC1114.SYSCON is
   -- Registers --
   ---------------
 
-  subtype SYSMEMREMAP_MAP is Interfaces.LPC1114.UInt2;
+  subtype SYSMEMREMAP_MAP_Field is Interfaces.LPC1114.UInt2;
   
   -- System Memory Remap Register
   type SYSMEMREMAP_Register is record
     -- MAP
-    MAP : SYSMEMREMAP_MAP := 2#10#;
+    MAP : SYSMEMREMAP_MAP_Field := 2#10#;
     Reserved_2_31 : Interface.LPC1114.UInt30 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -27,15 +27,15 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype PRESETCTRL_RST_N is Interfaces.LPC1114.Bit;
+  subtype PRESETCTRL_RST_N_Field is Interfaces.LPC1114.Bit;
 
   -- Peripheral Reset Control Register
   type PRESETCTRL_Register is record
-    SSP0_RST_N : PRESETCTRL_RST_N := 0;
-    I2C_RST_N : PRESETCTRL_RST_N := 0;
-    SSP1_RST_N : PRESETCTRL_RST_N := 0;
-    CAN_RST_N : PRESETCTRL_RST_N := 0;
-    Reserved_4_31 : Interface.LPC1114.UInt28 := 2#0#;
+    SSP0_RST_N : PRESETCTRL_RST_N_Field := 0;
+    I2C_RST_N : PRESETCTRL_RST_N_Field := 0;
+    SSP1_RST_N : PRESETCTRL_RST_N_Field := 0;
+    CAN_RST_N : PRESETCTRL_RST_N_Field := 0;
+    Reserved_4_31 : Interface.LPC1114.UInt28 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -49,14 +49,14 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYSPLLCTRL_MSEL is Interfaces.LPC1114.UInt5;
-  subtype SYSPLLCTRL_PSEL is Interfaces.LPC1114.UInt2;
+  subtype SYSPLLCTRL_MSEL_Field is Interfaces.LPC1114.UInt5;
+  subtype SYSPLLCTRL_PSEL_Field is Interfaces.LPC1114.UInt2;
 
   -- System PLL Control Register
   type SYSPLLCTRL_Register is record
-    MSEL : SYSPLLCTRL_MSEL := 2#0#;
-    PSEL : SYSPLLCTRL_PSEL := 2#0#;
-    Reserved_7_31 : Interface.LPC1114.UInt25 := 2#0#;
+    MSEL : SYSPLLCTRL_MSEL_Field := 16#000#;
+    PSEL : SYSPLLCTRL_PSEL_Field := 16#00#;
+    Reserved_7_31 : Interface.LPC1114.UInt25 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -68,13 +68,13 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYSPLLSTAT_LOCK is Interfaces.LPC1114.Bit;
+  subtype SYSPLLSTAT_LOCK_Field is Interfaces.LPC1114.Bit;
 
   -- System PLL Status Register
   type SYSPLLSTAT_Register is record
     -- READ-ONLY
-    LOCK : SYSPLLSTAT_LOCK := 2#0#;
-    Reserved_1_31 : Interface.LPC1114.UInt31 := 2#0#;
+    LOCK : SYSPLLSTAT_LOCK_Field := 16#0#;
+    Reserved_1_31 : Interface.LPC1114.UInt31 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -85,14 +85,14 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYSOSCCTRL_BYPASS is Interfaces.LPC1114.Bit;
-  subtype SYSOSCCTRL_FREQRANGE is Interfaces.LPC1114.Bit;
+  subtype SYSOSCCTRL_BYPASS_Field is Interfaces.LPC1114.Bit;
+  subtype SYSOSCCTRL_FREQRANGE_Field is Interfaces.LPC1114.Bit;
 
   -- System Oscillator Control Register
   type SYSOSCCTRL_Register is record
-    BYPASS : SYSOSCCTRL_BYPASS : 2#0#;
-    FREQRANGE : SYSOSCCTRL_FREQRANGE : 2#0#;
-    Reserved_2_31 : Interface.LPC1114.UInt30 := 2#0#;
+    BYPASS : SYSOSCCTRL_BYPASS_Field : 16#0#;
+    FREQRANGE : SYSOSCCTRL_FREQRANGE_Field : 16#0#;
+    Reserved_2_31 : Interface.LPC1114.UInt30 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -103,14 +103,14 @@ package Interfaces.LPC1114.SYSCON is
     Reserved_2_31 at 0 range 2..31;
   end record;
 
-  subtype WDTOSCCTRL_DIVSEL is Interfaces.LPC1114.UInt5;
-  subtype WDTOSSCTRL_FREQSEL is Interfaces.LPC1114.UInt4;
+  subtype WDTOSCCTRL_DIVSEL_Field is Interfaces.LPC1114.UInt5;
+  subtype WDTOSSCTRL_FREQSEL_Field is Interfaces.LPC1114.UInt4;
 
   -- Watchdog Oscillator Control Register
   type SYSOSCCTRL_Register is record
-    DIVSEL : WDTOSCCTRL_DIVSEL : 2#0#;
-    FREQSEL : WDTOSSCTRL_FREQSEL : 2#0#;
-    Reserved_9_31 : Interface.LPC1114.UInt23 := 2#0#;
+    DIVSEL : WDTOSCCTRL_DIVSEL_Field : 2#0#;
+    FREQSEL : WDTOSSCTRL_FREQSEL_Field : 16#00#;
+    Reserved_9_31 : Interface.LPC1114.UInt23 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -122,37 +122,37 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype IRCCTRL_TRIM is Interfaces.LPC1114.Byte;
+  subtype IRCCTRL_TRIM_Field is Interfaces.LPC1114.Byte;
 
   -- Internal Resonant Crystal Control Register
   type IRCCTRL_Register is record
-    TRIM : IRCCTRL_TRIM := 2#10000000#;
-    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 2#0#;
+    TRIM : IRCCTRL_TRIM_Field := 16#10000000#;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
   for IRCCTRL_Register use record
-    TRIM at 2#10000000# range 0..7;
-    Reserved_8_31 : Interfaces.LPC1114.UInt24;
+    TRIM at 0 range 0..7;
+    Reserved_8_31 at 0 range 8..31;
   end record;
 
 
-  subtype SYSRSTSTAT_RST is Interfaces.LPC1114.Bit;
+  subtype SYSRSTSTAT_RST_Field is Interfaces.LPC1114.Bit;
 
   -- System Reset Status Register
   type SYSRSTSTAT_Register is record
     -- POR Reset Status
-    POR : SYSRSTSTAT_RST := 2#0#;
+    POR : SYSRSTSTAT_RST_Field := 16#0#;
     -- External RESET Pin Status
-    EXTRST : SYSRSTSTAT_RST := 2#0#;
+    EXTRST : SYSRSTSTAT_RST_Field := 16#0#;
     -- Watchdog Reset Status
-    WDT : SYSRSTSTAT_RST := 2#0#;
+    WDT : SYSRSTSTAT_RST_Field := 16#0#;
     -- Brown-out Detect Reset Status
-    BOD : SYSRSTSTAT_RST := 2#0#;
+    BOD : SYSRSTSTAT_RST_Field := 16#0#;
     -- Software System Reset Status
-    SYSRST : SYSRSTSTAT_RST := 2#0#;
-    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 2#0#;
+    SYSRST : SYSRSTSTAT_RST_Field := 16#0#;
+    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -167,12 +167,12 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYS_CLKSEL_SEL is Interfaces.LPC1114.UInt2;
+  subtype SYS_CLKSEL_SEL_Field is Interfaces.LPC1114.UInt2;
 
   -- Generic System Clock Select Register
   type SYS_CLKSEL is record
-    SEL : SYS_CLKSEL_SEL := 2#0#;
-    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 2#0#;
+    SEL : SYS_CLKSEL_SEL_Field := 16#0#;
+    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -187,12 +187,12 @@ package Interfaces.LPC1114.SYSCON is
   type SYSPLLCLKSEL_Register is SYS_CLKSEL;
 
 
-  subtype SYS_ENA is Interfaces.LPC1114.Bit;
+  subtype SYS_ENA_Field is Interfaces.LPC1114.Bit;
 
   -- Generice Enable Register
   type SYS_CLKUEN is record
-    ENA : SYS_ENA := 2#0#;
-    Reserved_1_31 : Interfaces.LPC1114.UInt31 := 2#0#;
+    ENA : SYS_ENA_Field := 16#0#;
+    Reserved_1_31 : Interfaces.LPC1114.UInt31 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -214,13 +214,13 @@ package Interfaces.LPC1114.SYSCON is
   type MAINCLKUEN_Register is SYS_CLKUEN;
 
 
-  subtype SYS_DIV is Interfaces.LPC1114.Byte;
+  subtype SYS_DIV_Field is Interfaces.LPC1114.Byte;
 
   -- Generic System Clock Divider
   type SYS_CLKDIV is record
     -- SPI0_PCLK clock Divider
-    DIV : SYS_DIV := 2#0#;
-    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 2#0#;
+    DIV : SYS_DIV_Field := 16#00#;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -232,49 +232,59 @@ package Interfaces.LPC1114.SYSCON is
 
 
   -- System ABH Clock Divider Register
-  type SYSAHBCLKDIV_Register is SYS_CLKDIV;
+  type SYSAHBCLKDIV_Register is record
+    DIV : SYS_DIV_Field := 16#01#;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#00#;
+  end record
+    with Volatile_Full_Access, Size => 32,
+      Bit_Order => System.Low_Order_First;
+
+  for SYSAHBCLKDIV_Register use record
+    DIV at 0 range 0..7;
+    Reserved_8_31 at 0 range 8..31;
+  end record;
 
 
   -- System ABH Clock Control Register
   type SYSAHBCLKCTRL_Register is record
     -- READ-ONLY -- Enables AHB to multiple components
-    SYS : SYS_ENA := 2#1#;
+    SYS : SYS_ENA_Field := 2#1#;
     -- Enable Clock for ROM
-    ROM : SYS_ENA := 2#1#;
+    ROM : SYS_ENA_Field := 2#1#;
     -- Enable Clock for RAM
-    RAM : SYS_ENA := 2#1#;
+    RAM : SYS_ENA_Field := 2#1#;
     -- Enable clock for Flash Register Interface
-    FLASHREG : SYS_ENA := 2#1#;
+    FLASHREG : SYS_ENA_Field := 2#1#;
     -- Enable clock for Flash Array Access
-    FLASHARRAY : SYS_ENA := 2#1#;
+    FLASHARRAY : SYS_ENA_Field := 2#1#;
     -- Enable clock for I2C
-    I2C : SYS_ENA := 2#0#;
+    I2C : SYS_ENA_Field := 2#0#;
     -- Enable clock for GPIO
-    GPIO : SYS_ENA := 2#1#;
+    GPIO : SYS_ENA_Field := 2#1#;
     -- Enable clock for CT16B0
-    CT16B0 : SYS_ENA := 2#0#;
+    CT16B0 : SYS_ENA_Field := 2#0#;
     -- Enable clock for CT1b1
-    CT16B1 : SYS_ENA := 2#0#;
+    CT16B1 : SYS_ENA_Field := 2#0#;
     -- Enable clock for CT32B0
-    CT32B0 : SYS_ENA := 2#0#;
+    CT32B0 : SYS_ENA_Field := 2#0#;
     -- Enable clock for CT32B1
-    CT32B1 : SYS_ENA := 2#0#;
+    CT32B1 : SYS_ENA_Field := 2#0#;
     -- Enable clock for SPI0
-    SSP0 : SYS_ENA := 2#1#;
+    SSP0 : SYS_ENA_Field := 2#1#;
     -- Enable clock for UART
-    UART : SYS_ENA := 2#0#;
+    UART : SYS_ENA_Field := 2#0#;
     -- Enable clock for ADC
-    ADC : SYS_ENA := 2#0#;
+    ADC : SYS_ENA_Field := 2#0#;
     Reserved_14_14 : Interfaces.LPC1114.Bit := 2#0#;
     -- Enable clock for WDT
-    WDT : SYS_ENA := 2#0#;
+    WDT : SYS_ENA_Field := 2#0#;
     -- Enable clock for IOCON
-    ICOCON : SYS_ENA := 2#0#;
+    ICOCON : SYS_ENA_Field := 2#0#;
     -- Enable clock for CAN
-    CAN : SYS_ENA := 2#0#;
+    CAN : SYS_ENA_Field := 2#0#;
     -- Enable clocck for SPI1
-    SSP1 : SYS_ENA := 2#0#;
-    Reserved_19_31 : Interfaces.LPC1114.UInt13 := 2#0#;
+    SSP1 : SYS_ENA_Field := 2#0#;
+    Reserved_19_31 : Interfaces.LPC1114.UInt13 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -335,16 +345,16 @@ package Interfaces.LPC1114.SYSCON is
   type CLKOUTCLKDIV_Register is SYS_CLKDIV;
 
 
-  subtype PIOPORCAP0_CAPPIO0 is Interfaces.LPC1114.UInt12; 
-  subtype PIOPORCAP0_CAPPIO1 is Interfaces.LPC1114.UInt12;
-  subtype PIOPORCAP0_CAPPIO2 is Interfaces.LPC1114.Byte;
+  subtype PIOPORCAP0_CAPPIO0_Field is Interfaces.LPC1114.UInt12; 
+  subtype PIOPORCAP0_CAPPIO1_Field is Interfaces.LPC1114.UInt12;
+  subtype PIOPORCAP0_CAPPIO2_Field is Interfaces.LPC1114.Byte;
 
   -- POR Captured PIO Status Register 0  
   -- READ-ONLY
   type PIOPORCAP0_Register is record
-    CAPPIO0_n : PIOPORCAP0_CAPPIO0;
-    CAPPIO1_n : PIOPORCAP1_CAPPIO1;
-    CAPPIO2_n : PIOPORCAP2_CAPPIO1;
+    CAPPIO0_n : PIOPORCAP0_CAPPIO0_Field;
+    CAPPIO1_n : PIOPORCAP1_CAPPIO1_Field;
+    CAPPIO2_n : PIOPORCAP2_CAPPIO1_Field;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -356,21 +366,21 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype PIOPORCAP1_CAPPIO is Interfaces.LPC1114.Bit;
+  subtype PIOPORCAP1_CAPPIO_Field is Interfaces.LPC1114.Bit;
 
   -- POR Captured PIO Status Regsiter 1
   -- READ-ONLY
   type PIOPORCAP1_Register is record
-    CAPPIO2_8 : PIOPORCAP1_CAPPIO;
-    CAPPIO2_9 : PIOPORCAP1_CAPPIO;
-    CAPPIO2_10 : PIOPORCAP1_CAPPIO;
-    CAPPIO2_11 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_0 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_1 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_2 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_3 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_4 : PIOPORCAP1_CAPPIO;
-    CAPPIO3_5 : PIOPORCAP1_CAPPIO;
+    CAPPIO2_8 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO2_9 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO2_10 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO2_11 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_0 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_1 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_2 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_3 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_4 : PIOPORCAP1_CAPPIO_Field;
+    CAPPIO3_5 : PIOPORCAP1_CAPPIO_Field;
     Reserved_10_31 : Interfaces.LPC1114.UInt22;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -391,16 +401,16 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype BODCTRL_BODRSTLEV is Interfaces.LPC1114.UInt2;
-  subtype BODCTRL_BODINTVAL is Interfaces.LPC1114.UInt2;
-  subtype BODCTRL_BODRSTENA is Interfaces.LPC1114.Bit;
+  subtype BODCTRL_BODRSTLEV_Field is Interfaces.LPC1114.UInt2;
+  subtype BODCTRL_BODINTVAL_Field is Interfaces.LPC1114.UInt2;
+  subtype BODCTRL_BODRSTENA_Field is Interfaces.LPC1114.Bit;
 
   -- BOD Control Register
   type BODCTRL_Register is record
-    BODRSTLEV : BODCTRL_BODRSTLEV := 2#0#;
-    BODINTVAL : BODCTRL_BODINTVAL := 2#0#;
-    BODRSTENA : BODCTRL_BODRSTENA := 2#0#;
-    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 2#0#;
+    BODRSTLEV : BODCTRL_BODRSTLEV_Field := 2#00#;
+    BODINTVAL : BODCTRL_BODINTVAL_Field := 2#00#;
+    BODRSTENA : BODCTRL_BODRSTENA_Field := 2#0#;
+    Reserved_5_31 : Interfaces.LPC1114.UInt27 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -413,12 +423,12 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYSTCKCAL_CAL is Interfaces.LPC1114.UInt26;
+  subtype SYSTCKCAL_CAL_Field is Interfaces.LPC1114.UInt26;
 
   -- System Tick Counter Calibration Register
   type SYSTCKCAL_Register is record
-    CAL : SYSTCKCAL_CAL := 16#04#;
-    Reserved_26_31 : Interfaces.LPC1114.UInt6;
+    CAL : SYSTCKCAL_CAL_Field := 16#04#;
+    Reserved_26_31 : Interfaces.LPC1114.UInt6 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -429,14 +439,14 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype NMISRC_IRQNO is Interfaces.LPC1114.UInt5;
-  subtype NMISRC_NMIEN is Interfaces.LPC1114.Bit;
+  subtype NMISRC_IRQNO_Field is Interfaces.LPC1114.UInt5;
+  subtype NMISRC_NMIEN_Field is Interfaces.LPC1114.Bit;
 
   -- NMI Source Selection Register
   type NMISRC_Register is record
-    IRQNO : NMISRC_IRQNO := 2#0#;
+    IRQNO : NMISRC_IRQNO_Field := 2#0#;
     Reserved_5_30 : Interfaces.LPC1114.UInt26;
-    NMIEN : NMISRC_NMIEN := 2#0#;
+    NMIEN : NMISRC_NMIEN_Field := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -448,14 +458,14 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype STARTAPRP_APRPIO0 is Interfaces.LPC1114.UInt12;
-  subtype STARTAPRP_APRPIO1_0 is Interfaces.LPC1114.Bit;
+  subtype STARTAPRP_APRPIO0_Field is Interfaces.LPC1114.UInt12;
+  subtype STARTAPRP_APRPIO1_0_Field is Interfaces.LPC1114.Bit;
 
   -- Start Logic Edge Control Register 0
   type STARTAPRP0_Register is record
-    APRPIO0_n : STARTAPRP_APRPIO0 := 2#0#;
-    APRPIO1_0 : STARTAPRP_APRPIO1_0 := 2#0#;
-    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 2#0#;
+    APRPIO0_n : STARTAPRP_APRPIO0 := 16#0#;
+    APRPIO1_0 : STARTAPRP_APRPIO1_0 := 16#0#;
+    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -467,15 +477,15 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
   
-  subtype STARTERP_ERPIO0 is Interfaces.LPC1114.UInt12;
-  subtype STARTERP_ERPIO1 is Interfaces.LPC1114.Bit;
+  subtype STARTERP_ERPIO0_Field is Interfaces.LPC1114.UInt12;
+  subtype STARTERP_ERPIO1_Field is Interfaces.LPC1114.Bit;
 
   -- Start Logic Signal Enable Register 0
   type STARTERP0_Register is record
-    ERPIO0_n : STARTERP_ERPIO0 := 2#0#;
-    ERPIO1_0 : STARTERP_ERPIO1 := 2#0#;
+    ERPIO0_n : STARTERP_ERPIO0_Field := 16#0#;
+    ERPIO1_0 : STARTERP_ERPIO1_Field := 16#0#;
     -- DO NOT WRITE A 1 TO RESERVED BITS IN THIS REGISTER
-    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 2#0#;
+    Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -487,13 +497,13 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype STARTRSR_RSRPIO0 is Interfaces.LPC1114.UInt12;
-  subtype STARTRSR_RSRPIO1 is Interfaces.LPC1114.Bit;
+  subtype STARTRSR_RSRPIO0_Field is Interfaces.LPC1114.UInt12;
+  subtype STARTRSR_RSRPIO1_Field is Interfaces.LPC1114.Bit;
 
   -- Start Logic Reset Register 0
   type STARTRSRP0CLR_Register is record
-    RSRPIO0_n : STARTRSR_RSRPIO0;
-    RSRPIO1_0 : STARTRSR_RSRPIO1;
+    RSRPIO0_n : STARTRSR_RSRPIO0_Field;
+    RSRPIO1_0 : STARTRSR_RSRPIO1_Field;
     -- DO NOT WRITE A 1 TO RESERVED BITS IN THIS REGISTER
     Reserved_13_31 : Interfaces.LPC1114.UInt19;
   end record
@@ -507,14 +517,14 @@ package Interfaces.LPC1114.SYSCON is
   end record;
   
 
-  subtype STARTSRP_SRPIO0 is Interfaces.LPC1114.UInt12;
-  subtype STARTSRP_SRPIO1 is Interfaces.LPC1114.Bit;
+  subtype STARTSRP_SRPIO0_Field is Interfaces.LPC1114.UInt12;
+  subtype STARTSRP_SRPIO1_Field is Interfaces.LPC1114.Bit;
 
   -- Start Logic Status Register
   -- READ-ONLY
   type STARTSRP0_Register is record
-    SRPIO0_n : STARTSRP_SRPIO0;
-    SRPIO1_0 : STARTSRP_SRPIO1;
+    SRPIO0_n : STARTSRP_SRPIO0_Field;
+    SRPIO1_0 : STARTSRP_SRPIO1_Field;
     -- DO NOT WRITE A 1 TO RESERVED BITS IN THIS REGISTER
     Reserved_13_31 : Interfaces.LPC1114.UInt19;
   end record
@@ -528,15 +538,15 @@ package Interfaces.LPC1114.SYSCON is
   end record;
 
 
-  subtype SYS_PD is Interfaces.LPC1114.Bit;
+  subtype SYS_PD_Field is Interfaces.LPC1114.Bit;
 
   type PDSLEEPCFG_Register is record
     -- Always write these bits as 111
     NOTUSED0 : Interfaces.LPC1114.UInt3 := 2#0#;
-    BOD_PD : SYS_PD := 2#0#;
+    BOD_PD : SYS_PD_Field := 2#0#;
     -- Always write these bits as 11
     NOTUSED1 : Interfaces.LPC1114.UInt2 := 2#0#;
-    WDTOSC_PD : SYS_PD := 2#0#;
+    WDTOSC_PD : SYS_PD_Field := 2#0#;
     -- Always write this bit as 1
     NOTUSED2 : Interfaces.LPC1114.Bit := 2#0#;
     -- Always write these bits as 000
@@ -562,14 +572,14 @@ package Interfaces.LPC1114.SYSCON is
   
   -- Wake-up Configuration Register
   type PDAWAKECFG_Register is record
-    IRCOUT_PD : SYS_PD := 2#0#;
-    IRC_PD : SYS_PD := 2#0#;
-    FLASH_PD : SYS_PD := 2#0#:
-    BOD_PD : SYS_PD := 2#0#;
-    ADC_PD : SYS_PD := 2#1#;
-    SYSOSC_PD : SYS_PD := 2#1#;
-    WDTOSC_PD : SYS_PD := 2#1#;
-    SYSPLL_PD : SYS_PD := 2#1#;
+    IRCOUT_PD : SYS_PD_Field := 2#0#;
+    IRC_PD : SYS_PD_Field := 2#0#;
+    FLASH_PD : SYS_PD_Field := 2#0#:
+    BOD_PD : SYS_PD_Field := 2#0#;
+    ADC_PD : SYS_PD_Field := 2#1#;
+    SYSOSC_PD : SYS_PD_Field := 2#1#;
+    WDTOSC_PD : SYS_PD_Field := 2#1#;
+    SYSPLL_PD : SYS_PD_Field := 2#1#;
     -- Always write this bit as 1
     Reserved_8 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0
@@ -608,14 +618,14 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Power-down Configuration Register
   type PDRUNCFG_Register is record
-    IRCOUT_PD : SYS_PD := 2#0#;
-    IRC_PD : SYS_PD := 2#0#;
-    FLASH_PD : SYS_PD := 2#0#:
-    BOD_PD : SYS_PD := 2#0#;
-    ADC_PD : SYS_PD := 2#1#;
-    SYSOSC_PD : SYS_PD := 2#1#;
-    WDTOSC_PD : SYS_PD := 2#1#;
-    SYSPLL_PD : SYS_PD := 2#1#;
+    IRCOUT_PD : SYS_PD_Field := 2#0#;
+    IRC_PD : SYS_PD_Field := 2#0#;
+    FLASH_PD : SYS_PD_Field := 2#0#:
+    BOD_PD : SYS_PD_Field := 2#0#;
+    ADC_PD : SYS_PD_Field := 2#1#;
+    SYSOSC_PD : SYS_PD_Field := 2#1#;
+    WDTOSC_PD : SYS_PD_Field := 2#1#;
+    SYSPLL_PD : SYS_PD_Field := 2#1#;
     -- Always write this bit as 1
     Reserved_8 : Interfaces.LPC1114.Bit := 2#1#;
     -- Always write this bit as 0

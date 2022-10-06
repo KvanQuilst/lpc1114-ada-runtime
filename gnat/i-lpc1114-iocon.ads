@@ -10,20 +10,20 @@ package Interfaces.LPC1114.IOCON is
   -- Registers --
   ---------------
 
-  subtype PIO_FUNC is Interfaces.LPC1114.UInt3;
-  subtype PIO_MODE is Interfaces.LPC1114.UInt2;
-  subtype PIO_I2CMODE is Interfaces.LPC1114.UInt2;
-  subtype PIO_HYS  is Interfaces.LPC1114.Bit;
-  subtype PIO_OD   is Interfaces.LPC1114.Bit;
-  subtype PIO_ADMODE is Interfaces.LPC1114.Bit;
+  subtype PIO_FUNC_Field is Interfaces.LPC1114.UInt3;
+  subtype PIO_MODE_Field is Interfaces.LPC1114.UInt2;
+  subtype PIO_I2CMODE_Field is Interfaces.LPC1114.UInt2;
+  subtype PIO_HYS_Field  is Interfaces.LPC1114.Bit;
+  subtype PIO_OD_Field   is Interfaces.LPC1114.Bit;
+  subtype PIO_ADMODE_Field is Interfaces.LPC1114.Bit;
 
   -- Generalized PIO Register
   type IO_PIO is record
-    FUNC : PIO_FUNC := 2#000#;
-    MODE : PIO_MODE := 2#10#;
-    HYS  : PIO_HYS  := 2#0#;
+    FUNC : PIO_FUNC_Field := 2#000#;
+    MODE : PIO_MODE_Field := 2#10#;
+    HYS  : PIO_HYS_Field  := 2#0#;
     Reserved_6_9 : Interfaces.LPC1114.UInt4 := 2#0011#;
-    OD   : PIO_OD   := 2#0#;
+    OD   : PIO_OD_Field   := 2#0#;
     Reserved_11_31 : Interfaces.LPC1114.UInt21;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -40,9 +40,9 @@ package Interfaces.LPC1114.IOCON is
 
   -- Generalized I2C PIO Register
   type IO_I2CPIO is record
-    FUNC : PIO_FUNC := 2#000#;
+    FUNC : PIO_FUNC_Field := 2#000#;
     Reserved_3_7 : Interfaces.LPC1114.UInt5 := 2#00000#;
-    I2CMODE : PIO_I2CMODE := 2#00#;
+    I2CMODE : PIO_I2CMODE_Field := 2#00#;
     Reserved_10_31 : Interface.LPC1114.UInt22;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -57,13 +57,13 @@ package Interfaces.LPC1114.IOCON is
 
   -- Generalized AD PIO Register
   type IO_ADPIO is record
-    FUNC : PIO_FUNC := 2#000#;
-    MODE : PIO_MODE := 2#10#;
-    HYS  : PIO_HYS  := 2#0#;
+    FUNC : PIO_FUNC_Field := 2#000#;
+    MODE : PIO_MODE_Field := 2#10#;
+    HYS  : PIO_HYS_Field  := 2#0#;
     Reserved_6 : Interfaces.LPC1114.Bit := 2#1#;
-    ADMODE : PIO_ADMODE := 2#1#;
+    ADMODE : PIO_ADMODE_Field := 2#1#;
     Reserved_8_9 : Interfaces.LPC1114.UInt2 := 2#00#;
-    OD   : PIO_OD   := 2#0#;
+    OD   : PIO_OD_Field   := 2#0#;
     Reserved_11_31 : Interfaces.LPC1114.UInt21;
   end record
     with Volatile_Full_Access, Size => 32,
