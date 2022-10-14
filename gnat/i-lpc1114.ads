@@ -37,8 +37,6 @@ package Interfaces.LPC1114 is
     with Size => 14;
   Type UInt15 is mod 2**15
     with Size => 15;
-  Type UInt16 is mod 2**16
-    with Size => 16;
   Type UInt17 is mod 2**17
     with Size => 17;
   Type UInt18 is mod 2**18
@@ -90,6 +88,6 @@ package Interfaces.LPC1114 is
   SYST_Base : constant System.Address := System'To_Address (16#E000E000#);
   ADC_Base : constant System.Address := System'To_Address (16#4001C000#);
   IOCON_Base : constant System.Address := System'To_Address (16#40044000#);
-  SYSCON_Base : constant System.Addresss := System'To_Address (16#40048000#);
+  SYSCON_Base : constant System.Address := System'To_Address (16#40048000#);
 
 end Interfaces.LPC1114;

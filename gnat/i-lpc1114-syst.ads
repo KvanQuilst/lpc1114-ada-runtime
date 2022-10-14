@@ -4,7 +4,7 @@ with System;
 
 package Interfaces.LPC1114.SYST is
   pragma Preelaborate;
-  pragma No_Elaborate_Code_All;
+  pragma No_Elaboration_Code_All;
 
   ---------------
   -- Registers --
@@ -50,7 +50,7 @@ package Interfaces.LPC1114.SYST is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SYS_RVR_Register use record
+  for SYST_RVR_Register use record
     RELOAD at 0 range 0..23;
     Reserved_24_31 at 0 range 24..31;
   end record;
@@ -67,13 +67,13 @@ package Interfaces.LPC1114.SYST is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SYS_CVR_Register use record
+  for SYST_CVR_Register use record
     CURRENT at 0 range 0..23;
     Reserved_24_31 at 0 range 24..31;
   end record;
 
 
-  subtype SYST_CALIB_TENMS_Field is Interfaces.LCP1114.UInt24;
+  subtype SYST_CALIB_TENMS_Field is Interfaces.LPC1114.UInt24;
   subtype SYST_CALIB_SKEW_Field is Interfaces.LPC1114.Bit;
   subtype SYST_CALIB_NOREF_Field is Interfaces.LPC1114.Bit;
 
@@ -106,7 +106,7 @@ package Interfaces.LPC1114.SYST is
   for SYST use record
     SYST_CSR   at 16#00# range 0..31;
     SYST_RVR   at 16#04# range 0..31;
-    SYST_RVR   at 16#08# range 0..31;
+    SYST_CVR   at 16#08# range 0..31;
     SYST_CALIB at 16#0C# range 0..31;
   end record;
 

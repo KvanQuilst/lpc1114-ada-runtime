@@ -84,7 +84,7 @@ __gnat_pend_sv_trap:
   .thumb_func
 .weak __gnat_sys_tick_trap
 .type __gnat_sys_tick_trap, %function
-__gnat_pend_sv_trap:
+__gnat_sys_tick_trap:
 0:  b 0b
   .size __gnat_sys_tick_trap, . - __gnat_sys_tick_trap
 

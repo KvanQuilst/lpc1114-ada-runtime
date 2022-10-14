@@ -16,14 +16,14 @@ package Interfaces.LPC1114.SYSCON is
   type SYSMEMREMAP_Register is record
     -- MAP
     MAP : SYSMEMREMAP_MAP_Field := 2#10#;
-    Reserved_2_31 : Interface.LPC1114.UInt30 := 2#0#;
+    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 2#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
   for SYSMEMREMAP_Register use record
     MAP at 0 range 0..1;
-    Reservce_2_31 at 0 range 2..31;
+    Reserved_2_31 at 0 range 2..31;
   end record;
 
 
@@ -35,7 +35,7 @@ package Interfaces.LPC1114.SYSCON is
     I2C_RST_N : PRESETCTRL_RST_N_Field := 0;
     SSP1_RST_N : PRESETCTRL_RST_N_Field := 0;
     CAN_RST_N : PRESETCTRL_RST_N_Field := 0;
-    Reserved_4_31 : Interface.LPC1114.UInt28 := 16#00#;
+    Reserved_4_31 : Interfaces.LPC1114.UInt28 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -56,7 +56,7 @@ package Interfaces.LPC1114.SYSCON is
   type SYSPLLCTRL_Register is record
     MSEL : SYSPLLCTRL_MSEL_Field := 16#000#;
     PSEL : SYSPLLCTRL_PSEL_Field := 16#00#;
-    Reserved_7_31 : Interface.LPC1114.UInt25 := 16#0#;
+    Reserved_7_31 : Interfaces.LPC1114.UInt25 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -74,7 +74,7 @@ package Interfaces.LPC1114.SYSCON is
   type SYSPLLSTAT_Register is record
     -- READ-ONLY
     LOCK : SYSPLLSTAT_LOCK_Field := 16#0#;
-    Reserved_1_31 : Interface.LPC1114.UInt31 := 16#00#;
+    Reserved_1_31 : Interfaces.LPC1114.UInt31 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -90,9 +90,9 @@ package Interfaces.LPC1114.SYSCON is
 
   -- System Oscillator Control Register
   type SYSOSCCTRL_Register is record
-    BYPASS : SYSOSCCTRL_BYPASS_Field : 16#0#;
-    FREQRANGE : SYSOSCCTRL_FREQRANGE_Field : 16#0#;
-    Reserved_2_31 : Interface.LPC1114.UInt30 := 16#00#;
+    BYPASS : SYSOSCCTRL_BYPASS_Field := 16#0#;
+    FREQRANGE : SYSOSCCTRL_FREQRANGE_Field := 16#0#;
+    Reserved_2_31 : Interfaces.LPC1114.UInt30 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -107,15 +107,15 @@ package Interfaces.LPC1114.SYSCON is
   subtype WDTOSSCTRL_FREQSEL_Field is Interfaces.LPC1114.UInt4;
 
   -- Watchdog Oscillator Control Register
-  type SYSOSCCTRL_Register is record
-    DIVSEL : WDTOSCCTRL_DIVSEL_Field : 2#0#;
-    FREQSEL : WDTOSSCTRL_FREQSEL_Field : 16#00#;
-    Reserved_9_31 : Interface.LPC1114.UInt23 := 16#00#;
+  type WDTOSCCTRL_Register is record
+    DIVSEL : WDTOSCCTRL_DIVSEL_Field := 2#0#;
+    FREQSEL : WDTOSSCTRL_FREQSEL_Field := 16#00#;
+    Reserved_9_31 : Interfaces.LPC1114.UInt23 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SYSOSCCTRL_Register use record
+  for WDTOSCCTRL_Register use record
     DIVSEL at 0 range 0..4;
     FREQSEL at 0 range 5..8;
     Reserved_9_31 at 0 range 9..31;
@@ -126,7 +126,7 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Internal Resonant Crystal Control Register
   type IRCCTRL_Register is record
-    TRIM : IRCCTRL_TRIM_Field := 16#10000000#;
+    TRIM : IRCCTRL_TRIM_Field := 2#10000000#;
     Reserved_8_31 : Interfaces.LPC1114.UInt24 := 16#00#;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -177,14 +177,14 @@ package Interfaces.LPC1114.SYSCON is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SYS_CLKSEL_Register use record
+  for SYS_CLKSEL use record
     SEL at 0 range 0..1;
     Reserved_2_31 at 0 range 2..31;
   end record;
   
 
   -- System PLL Clock Source Select Register
-  type SYSPLLCLKSEL_Register is SYS_CLKSEL;
+  type SYSPLLCLKSEL_Register is new SYS_CLKSEL;
 
 
   subtype SYS_ENA_Field is Interfaces.LPC1114.Bit;
@@ -197,21 +197,21 @@ package Interfaces.LPC1114.SYSCON is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SYS_CLKUEN_Register use record
-    ENA at 0 range 0..1;
+  for SYS_CLKUEN use record
+    ENA at 0 range 0..0;
     Reserved_1_31 at 0 range 1..31;
   end record;
 
   -- System PLL Clock Source Update Enable Register
-  type SYSPLLCLKUEN_Register is SYS_CLKUEN;
+  type SYSPLLCLKUEN_Register is new SYS_CLKUEN;
 
 
   -- Main Clock Source Select Register
-  type MAINCLKSEL_Register is SYS_CLKSEL;
+  type MAINCLKSEL_Register is new SYS_CLKSEL;
 
 
   -- Main Clock Source Update Enable Register
-  type MAINCLKUEN_Register is SYS_CLKUEN;
+  type MAINCLKUEN_Register is new SYS_CLKUEN;
 
 
   subtype SYS_DIV_Field is Interfaces.LPC1114.Byte;
@@ -225,7 +225,7 @@ package Interfaces.LPC1114.SYSCON is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SSP0CLKDIV_Register use record
+  for SYS_CLKDIV use record
     DIV at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -279,7 +279,7 @@ package Interfaces.LPC1114.SYSCON is
     -- Enable clock for WDT
     WDT : SYS_ENA_Field := 2#0#;
     -- Enable clock for IOCON
-    ICOCON : SYS_ENA_Field := 2#0#;
+    IOCON : SYS_ENA_Field := 2#0#;
     -- Enable clock for CAN
     CAN : SYS_ENA_Field := 2#0#;
     -- Enable clocck for SPI1
@@ -314,35 +314,35 @@ package Interfaces.LPC1114.SYSCON is
 
 
   -- SPI0 Clock Divide Register
-  type SSP0CLKDIV_Register is SYS_CLKDIV;
+  type SSP0CLKDIV_Register is new SYS_CLKDIV;
   
   
   -- UART Clock Divide Register
-  type UARTCLKDIV_Register is SYS_CLKDIV;
+  type UARTCLKDIV_Register is new SYS_CLKDIV;
 
 
   -- SPI1 Clock Divide Register
-  type SSP1CLKDIV_Register is SYS_CLKDIV;
+  type SSP1CLKDIV_Register is new SYS_CLKDIV;
 
 
   -- WDT Clock Source Select Register
-  type WDTCLKSEL_Register is SYS_CLKSEL;
+  type WDTCLKSEL_Register is new SYS_CLKSEL;
 
   -- WDT Clock Source Update Enable Register
-  type WDTCLKUEN_Register is SYS_CLKUEN;
+  type WDTCLKUEN_Register is new SYS_CLKUEN;
 
   -- WDT Clock Divide Register
-  type WDTCLKDIV_Register is SYS_CLKDIV;
+  type WDTCLKDIV_Register is new SYS_CLKDIV;
 
 
   -- CLKOUT Clock Source Select Register
-  type CLKOUTCLKSEL_Register is SYS_CLKSEL
+  type CLKOUTCLKSEL_Register is new SYS_CLKSEL;
 
   -- CLKOUT Clock Source Update Enable Register
-  type CLKOUTCLKUEN_Register is SYS_CLKUEN;
+  type CLKOUTUEN_Register is new SYS_CLKUEN;
 
   -- CLKOUT Clock Source Divider Register
-  type CLKOUTCLKDIV_Register is SYS_CLKDIV;
+  type CLKOUTCLKDIV_Register is new SYS_CLKDIV;
 
 
   subtype PIOPORCAP0_CAPPIO0_Field is Interfaces.LPC1114.UInt12; 
@@ -353,8 +353,8 @@ package Interfaces.LPC1114.SYSCON is
   -- READ-ONLY
   type PIOPORCAP0_Register is record
     CAPPIO0_n : PIOPORCAP0_CAPPIO0_Field;
-    CAPPIO1_n : PIOPORCAP1_CAPPIO1_Field;
-    CAPPIO2_n : PIOPORCAP2_CAPPIO1_Field;
+    CAPPIO1_n : PIOPORCAP0_CAPPIO1_Field;
+    CAPPIO2_n : PIOPORCAP0_CAPPIO2_Field;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -386,7 +386,7 @@ package Interfaces.LPC1114.SYSCON is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for PIOPPORCAP1_Register use record
+  for PIOPORCAP1_Register use record
     CAPPIO2_8 at 0 range 0..0;
     CAPPIO2_9 at 0 range 1..1;
     CAPPIO2_10 at 0 range 2..2;
@@ -453,7 +453,7 @@ package Interfaces.LPC1114.SYSCON is
 
   for NMISRC_Register use record
     IRQNO at 0 range 0..4;
-    Reserved_5_31 at 0 range 5..30;
+    Reserved_5_30 at 0 range 5..30;
     NMIEN at 0 range 31..31;
   end record;
 
@@ -463,8 +463,8 @@ package Interfaces.LPC1114.SYSCON is
 
   -- Start Logic Edge Control Register 0
   type STARTAPRP0_Register is record
-    APRPIO0_n : STARTAPRP_APRPIO0 := 16#0#;
-    APRPIO1_0 : STARTAPRP_APRPIO1_0 := 16#0#;
+    APRPIO0_n : STARTAPRP_APRPIO0_Field := 16#0#;
+    APRPIO1_0 : STARTAPRP_APRPIO1_0_Field := 16#0#;
     Reserved_13_31 : Interfaces.LPC1114.UInt19 := 16#0#;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -574,7 +574,7 @@ package Interfaces.LPC1114.SYSCON is
   type PDAWAKECFG_Register is record
     IRCOUT_PD : SYS_PD_Field := 2#0#;
     IRC_PD : SYS_PD_Field := 2#0#;
-    FLASH_PD : SYS_PD_Field := 2#0#:
+    FLASH_PD : SYS_PD_Field := 2#0#;
     BOD_PD : SYS_PD_Field := 2#0#;
     ADC_PD : SYS_PD_Field := 2#1#;
     SYSOSC_PD : SYS_PD_Field := 2#1#;
@@ -611,7 +611,7 @@ package Interfaces.LPC1114.SYSCON is
     Reserved_10 at 0 range 10..10;
     Reserved_11 at 0 range 11..11;
     Reserved_12 at 0 range 12..12;
-    Reserved_13_15 at 0 range 13..15
+    Reserved_13_15 at 0 range 13..15;
     Reserved_16_31 at 0 range 16..31;
   end record;
 
@@ -620,7 +620,7 @@ package Interfaces.LPC1114.SYSCON is
   type PDRUNCFG_Register is record
     IRCOUT_PD : SYS_PD_Field := 2#0#;
     IRC_PD : SYS_PD_Field := 2#0#;
-    FLASH_PD : SYS_PD_Field := 2#0#:
+    FLASH_PD : SYS_PD_Field := 2#0#;
     BOD_PD : SYS_PD_Field := 2#0#;
     ADC_PD : SYS_PD_Field := 2#1#;
     SYSOSC_PD : SYS_PD_Field := 2#1#;
@@ -657,7 +657,7 @@ package Interfaces.LPC1114.SYSCON is
     Reserved_10 at 0 range 10..10;
     Reserved_11 at 0 range 11..11;
     Reserved_12 at 0 range 12..12;
-    Reserved_13_15 at 0 range 13..15
+    Reserved_13_15 at 0 range 13..15;
     Reserved_16_31 at 0 range 16..31;
   end record;
 
@@ -667,9 +667,9 @@ package Interfaces.LPC1114.SYSCON is
   type DEVICE_ID_Register is record
     DEVICEID : Interfaces.LPC1114.UInt32 := 16#0A40902B#;
   end record
-    with Volatile_Full_Access, Size => 32,
-      Bit_Order => System.Low_Order_First;
+    with Volatile_Full_Access, Size => 32;
 
+  type Reserved_Space is array (Integer range <>) of Interfaces.LPC1114.UInt32;
 
   -- System Control Block
   type SYSCON is record
@@ -677,51 +677,51 @@ package Interfaces.LPC1114.SYSCON is
     PRESETCTRL    : aliased PRESETCTRL_Register;
     SYSPLLCTRL    : aliased SYSPLLCTRL_Register;
     SYSPLLSTAT    : aliased SYSPLLSTAT_Register;
-    Reserved0     : array (4) of Interfaces.LPC1114.UInt32;
+    Reserved0     : aliased Reserved_Space (0..3);
     SYSOSCCTRL    : aliased SYSOSCCTRL_Register;
     WDTOSCCTRL    : aliased WDTOSCCTRL_Register;
     IRCCTRL       : aliased IRCCTRL_Register;
-    Reserved1     : Interfaces.LPC1114.UInt32;
+    Reserved1     : aliased Reserved_Space (0..0);
     SYSRSTSTAT    : aliased SYSRSTSTAT_Register;
-    Reserved2     : array (3) of Interfaces.LPC1114.UInt32;
+    Reserved2     : aliased Reserved_Space (0..2);
     SYSPLLCLKSEL  : aliased SYSPLLCLKSEL_Register;
     SYSPLLCLKUEN  : aliased SYSPLLCLKUEN_Register;
-    Reserved3     : array (10) of Interfaces.LPC1114.UInt32;
+    Reserved3     : aliased Reserved_Space (0..9);
     MAINCLKSEL    : aliased MAINCLKSEL_Register;
     MAINCLKUEN    : aliased MAINCLKUEN_Register;
     SYSAHBCLKDIV  : aliased SYSAHBCLKDIV_Register;
-    Reserved4     : Interfaces.LPC1114.UInt32;
+    Reserved4     : aliased Reserved_Space (0..0);
     SYSAHBCLKCTRL : aliased SYSAHBCLKCTRL_Register;
-    Reserved5     : array (4) of Interfaces.LPC1114.UInt32;
+    Reserved5     : aliased Reserved_Space (0..3);
     SSP0CLKDIV    : aliased SSP0CLKDIV_Register;
     UARTCLKDIV    : aliased UARTCLKDIV_Register;
     SSP1CLKDIV    : aliased SSP1CLKDIV_Register;
-    Reserved6     : array (12) of Interfaces.LPC1114.UInt32;
+    Reserved6     : aliased Reserved_Space (0..11);
     WDTCLKSEL     : aliased WDTCLKSEL_Register;
     WDTCLKUEN     : aliased WDTCLKUEN_Register;
     WDTCLKDIV     : aliased WDTCLKDIV_Register;
-    Reserved7     : Interfaces.LPC1114.UInt32;
+    Reserved7     : aliased Reserved_Space (0..0);
     CLKOUTCLKSEL  : aliased CLKOUTCLKSEL_Register;
     CLKOUTUEN     : aliased CLKOUTUEN_Register;
     CLKOUTCLKDIV  : aliased CLKOUTCLKDIV_Register;
-    Reserved8     : array (5) of Interfaces.LPC1114.UInt32;
+    Reserved8     : aliased Reserved_Space (0..4);
     PIOPORCAP0    : aliased PIOPORCAP0_Register;
     PIOPORCAP1    : aliased PIOPORCAP1_Register;
-    Reserved9     : array (18) of Interfaces.LPC1114.UInt32;
+    Reserved9     : aliased Reserved_Space (0..17);
     BODCTRL       : aliased BODCTRL_Register;
-    SYSTCKCAL     : aliased SYSTCKCLA_Register;
-    Reserved10    : array (6) of Interfaces.LPC1114.UInt32;
+    SYSTCKCAL     : aliased SYSTCKCAL_Register;
+    Reserved10    : aliased Reserved_Space (0..5);
     NMISRC        : aliased NMISRC_Register;
-    Reserved11    : array (34) of Interfaces.LPC1114.UInt32;
+    Reserved11    : aliased Reserved_Space (0..33);
     STARTAPRP0    : aliased STARTAPRP0_Register;
     STARTERP0     : aliased STARTERP0_Register;
     STARTRSRP0CLR : aliased STARTRSRP0CLR_Register;
     STARTSRP0     : aliased STARTSRP0_Register;
-    Reserved12    : array (8) of Interfaces.LPC1114.UInt32;
+    Reserved12    : aliased Reserved_Space (0..7);
     PDSLEEPCFG    : aliased PDSLEEPCFG_Register;
     PDAWAKECFG    : aliased PDAWAKECFG_Register;
     PDRUNCFG      : aliased PDRUNCFG_Register;
-    Reserved13    : array (111) of Interfaces.LPC1114.UInt32;
+    Reserved13    : aliased Reserved_Space (0..109);
     DEVICE_ID     : aliased DEVICE_ID_Register;
   end record
     with Volatile;
@@ -731,26 +731,26 @@ package Interfaces.LPC1114.SYSCON is
     PRESETCTRL    at 16#4# range 0..31;
     SYSPLLCTRL    at 16#8# range 0..31;
     SYSPLLSTAT    at 16#C# range 0..31;
-    Reserved0     at 16#10# range 0..31;
+    Reserved0     at 16#10# range 0..127;
     SYSOSCCTRL    at 16#20# range 0..31;
     WDTOSCCTRL    at 16#24# range 0..31;
     IRCCTRL       at 16#28# range 0..31;
     Reserved1     at 16#2C# range 0..31;
     SYSRSTSTAT    at 16#30# range 0..31;
-    Reserved2     at 16#34# range 0..31;
+    Reserved2     at 16#34# range 0..95;
     SYSPLLCLKSEL  at 16#40# range 0..31;
     SYSPLLCLKUEN  at 16#44# range 0..31;
-    Reserved3     at 16#48# range 0..31;
+    Reserved3     at 16#48# range 0..319;
     MAINCLKSEL    at 16#70# range 0..31;
     MAINCLKUEN    at 16#74# range 0..31;
     SYSAHBCLKDIV  at 16#78# range 0..31;
     Reserved4     at 16#7C# range 0..31;
     SYSAHBCLKCTRL at 16#80# range 0..31;
-    Reserved5     at 16#84# range 0..31;
+    Reserved5     at 16#84# range 0..127;
     SSP0CLKDIV    at 16#94# range 0..31;
     UARTCLKDIV    at 16#98# range 0..31;
     SSP1CLKDIV    at 16#9C# range 0..31;
-    Reserved6     at 16#A0# range 0..31;
+    Reserved6     at 16#A0# range 0..383;
     WDTCLKSEL     at 16#D0# range 0..31;
     WDTCLKUEN     at 16#D4# range 0..31;
     WDTCLKDIV     at 16#D8# range 0..31;
@@ -758,24 +758,24 @@ package Interfaces.LPC1114.SYSCON is
     CLKOUTCLKSEL  at 16#E0# range 0..31;
     CLKOUTUEN     at 16#E4# range 0..31;
     CLKOUTCLKDIV  at 16#E8# range 0..31;
-    Reserved8     at 16#EC# range 0..31;
+    Reserved8     at 16#EC# range 0..159;
     PIOPORCAP0    at 16#100# range 0..31;
     PIOPORCAP1    at 16#104# range 0..31;
-    Reserved9     at 16#108# range 0..31;
+    Reserved9     at 16#108# range 0..575;
     BODCTRL       at 16#150# range 0..31;
     SYSTCKCAL     at 16#154# range 0..31;
-    Reserved10    at 16#158# range 0..31;
+    Reserved10    at 16#158# range 0..191;
     NMISRC        at 16#174# range 0..31;
-    Reserved11    at 16#178# range 0..31;
+    Reserved11    at 16#178# range 0..1087;
     STARTAPRP0    at 16#200# range 0..31;
     STARTERP0     at 16#204# range 0..31;
     STARTRSRP0CLR at 16#208# range 0..31;
     STARTSRP0     at 16#20C# range 0..31;
-    Reserved12    at 16#210# range 0..31;
+    Reserved12    at 16#210# range 0..255;
     PDSLEEPCFG    at 16#230# range 0..31;
     PDAWAKECFG    at 16#234# range 0..31;
     PDRUNCFG      at 16#238# range 0..31;
-    Reserved13    at 16#23C# range 0..31;
+    Reserved13    at 16#23C# range 0..3519;
     DEVICE_ID     at 16#3F4# range 0..31;
   end record;
 
