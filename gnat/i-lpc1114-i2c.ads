@@ -156,7 +156,7 @@ package Interfaces.LPC1114.I2C is
     STAC at 0 range 5..5;
     I2ENC at 0 range 6..6;
     Reserved_7 at 0 range 7..7;
-    Resreved_8_31 at 0 range 8..31;
+    Reserved_8_31 at 0 range 8..31;
   end record;
 
 
@@ -211,7 +211,7 @@ package Interfaces.LPC1114.I2C is
       Bit_Order => System.Low_Order_First;
 
   for I2C0MASK_Register use record
-    Reserved_0 at 0 range 0..1;
+    Reserved_0 at 0 range 0..0;
     MASK at 0 range 1..7;
     Reserved_8_31 at 0 range 8..31;
   end record;

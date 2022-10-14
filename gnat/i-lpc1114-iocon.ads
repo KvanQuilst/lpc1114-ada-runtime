@@ -43,7 +43,7 @@ package Interfaces.LPC1114.IOCON is
     FUNC : PIO_FUNC_Field := 2#000#;
     Reserved_3_7 : Interfaces.LPC1114.UInt5 := 2#00000#;
     I2CMODE : PIO_I2CMODE_Field := 2#00#;
-    Reserved_10_31 : Interface.LPC1114.UInt22;
+    Reserved_10_31 : Interfaces.LPC1114.UInt22;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -91,67 +91,72 @@ package Interfaces.LPC1114.IOCON is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
+  for IO_LOC use record
+    LOC at 0 range 0..1;
+    Reserved_2_31 at 0 range 2..31;
+  end record;
 
-  type IOCON_PIO_RESET_PIO0_0_Register is IO_PIO;
-  type IOCON_PIO0_1_Register is IO_PIO;
-  type IOCON_PIO0_2_Register is IO_PIO;
-  type IOCON_PIO0_3_Register is IO_PIO;
-  type IOCON_PIO0_4_Register is IO_I2CPIO;
-  type IOCON_PIO0_5_Register is IO_I2CPIO;
-  type IOCON_PIO0_6_Register is IO_PIO;
-  type IOCON_PIO0_7_Register is IO_PIO;
-  type IOCON_PIO0_8_Register is IO_PIO;
-  type IOCON_PIO0_9_Register is IO_PIO;
-  type IOCON_SWCLK_PIO0_10_Register is IO_PIO;
-  type IOCON_R_PIO0_11_Register is IO_ADPIO;
 
-  type IOCON_R_PIO1_0_Register is IO_ADPIO;
-  type IOCON_R_PIO1_1_Register is IO_ADPIO;
-  type IOCON_R_PIO1_2_Register is IO_ADPIO;
-  type IOCON_SWDIO_PIO1_3 is IO_ADPIO;
-  type IOCON_PIO1_4_Register is IO_ADPIO;
-  type IOCON_PIO1_5_Register is IO_PIO;
-  type IOCON_PIO1_6_Register is IO_PIO;
-  type IOCON_PIO1_7_Register is IO_PIO;
-  type IOCON_PIO1_8_Register is IO_PIO;
-  type IOCON_PIO1_9_Register is IO_PIO;
-  type IOCON_PIO1_10_Register is IO_ADPIO;
-  type IOCON_PIO1_11_Register is IO_ADPIO;
+  type IOCON_RESET_PIO0_0_Register is new IO_PIO;
+  type IOCON_PIO0_1_Register is new IO_PIO;
+  type IOCON_PIO0_2_Register is new IO_PIO;
+  type IOCON_PIO0_3_Register is new IO_PIO;
+  type IOCON_PIO0_4_Register is new IO_I2CPIO;
+  type IOCON_PIO0_5_Register is new IO_I2CPIO;
+  type IOCON_PIO0_6_Register is new IO_PIO;
+  type IOCON_PIO0_7_Register is new IO_PIO;
+  type IOCON_PIO0_8_Register is new IO_PIO;
+  type IOCON_PIO0_9_Register is new IO_PIO;
+  type IOCON_SWCLK_PIO0_10_Register is new IO_PIO;
+  type IOCON_R_PIO0_11_Register is new IO_ADPIO;
 
-  type IOCON_PIO2_0_Register is IO_PIO;
-  type IOCON_PIO2_1_Register is IO_PIO;
-  type IOCON_PIO2_2_Register is IO_PIO;
-  type IOCON_PIO2_3_Register is IO_PIO;
-  type IOCON_PIO2_4_Register is IO_PIO;
-  type IOCON_PIO2_5_Register is IO_PIO;
-  type IOCON_PIO2_6_Register is IO_PIO;
-  type IOCON_PIO2_7_Register is IO_PIO;
-  type IOCON_PIO2_8_Register is IO_PIO;
-  type IOCON_PIO2_9_Register is IO_PIO;
-  type IOCON_PIO2_10_Register is IO_PIO;
-  type IOCON_PIO2_11_Register is IO_PIO;
+  type IOCON_R_PIO1_0_Register is new IO_ADPIO;
+  type IOCON_R_PIO1_1_Register is new IO_ADPIO;
+  type IOCON_R_PIO1_2_Register is new IO_ADPIO;
+  type IOCON_SWDIO_PIO1_3_Register is new IO_ADPIO;
+  type IOCON_PIO1_4_Register is new IO_ADPIO;
+  type IOCON_PIO1_5_Register is new IO_PIO;
+  type IOCON_PIO1_6_Register is new IO_PIO;
+  type IOCON_PIO1_7_Register is new IO_PIO;
+  type IOCON_PIO1_8_Register is new IO_PIO;
+  type IOCON_PIO1_9_Register is new IO_PIO;
+  type IOCON_PIO1_10_Register is new IO_ADPIO;
+  type IOCON_PIO1_11_Register is new IO_ADPIO;
 
-  type IOCON_PIO3_0_Register is IO_PIO;
-  type IOCON_PIO3_1_Register is IO_PIO;
-  type IOCON_PIO3_2_Register is IO_PIO;
-  type IOCON_PIO3_3_Register is IO_PIO;
-  type IOCON_PIO3_4_Register is IO_PIO;
-  type IOCON_PIO3_5_Register is IO_PIO;
+  type IOCON_PIO2_0_Register is new IO_PIO;
+  type IOCON_PIO2_1_Register is new IO_PIO;
+  type IOCON_PIO2_2_Register is new IO_PIO;
+  type IOCON_PIO2_3_Register is new IO_PIO;
+  type IOCON_PIO2_4_Register is new IO_PIO;
+  type IOCON_PIO2_5_Register is new IO_PIO;
+  type IOCON_PIO2_6_Register is new IO_PIO;
+  type IOCON_PIO2_7_Register is new IO_PIO;
+  type IOCON_PIO2_8_Register is new IO_PIO;
+  type IOCON_PIO2_9_Register is new IO_PIO;
+  type IOCON_PIO2_10_Register is new IO_PIO;
+  type IOCON_PIO2_11_Register is new IO_PIO;
 
-  type IOCON_SCK_LOC_Register is IO_LOC;
-  type IOCON_DSR_LOC_Register is IO_LOC;
-  type IOCON_DCD_LOC_Register is IO_LOC;
-  type IOCON_RI_LOC_Register is IO_LOC;
+  type IOCON_PIO3_0_Register is new IO_PIO;
+  type IOCON_PIO3_1_Register is new IO_PIO;
+  type IOCON_PIO3_2_Register is new IO_PIO;
+  type IOCON_PIO3_3_Register is new IO_PIO;
+  type IOCON_PIO3_4_Register is new IO_PIO;
+  type IOCON_PIO3_5_Register is new IO_PIO;
+
+  type IOCON_SCK_LOC_Register is new IO_LOC;
+  type IOCON_DSR_LOC_Register is new IO_LOC;
+  type IOCON_DCD_LOC_Register is new IO_LOC;
+  type IOCON_RI_LOC_Register is new IO_LOC;
 
 
   type IOCON is record
     IOCON_PIO2_6        : aliased IOCON_PIO2_6_Register;
-    Reserved0           : Interface.LPC1114.UInt32;
+    Reserved0           : Interfaces.LPC1114.UInt32;
     IOCON_PIO2_0        : aliased IOCON_PIO2_0_Register; 
     IOCON_RESET_PIO0_0  : aliased IOCON_RESET_PIO0_0_Register;
     IOCON_PIO0_1        : aliased IOCON_PIO0_1_Register;
     IOCON_PIO1_8        : aliased IOCON_PIO1_8_Register;
-    Reserved1           : Interface.LPC1114.UInt32;
+    Reserved1           : Interfaces.LPC1114.UInt32;
     IOCON_PIO0_2        : aliased IOCON_PIO0_2_Register;
     IOCON_PIO2_7        : aliased IOCON_PIO2_7_Register;
     IOCON_PIO2_8        : aliased IOCON_PIO2_8_Register; 
@@ -171,7 +176,7 @@ package Interfaces.LPC1114.IOCON is
     IOCON_PIO2_2        : aliased IOCON_PIO2_2_Register; 
     IOCON_PIO0_8        : aliased IOCON_PIO0_8_Register; 
     IOCON_PIO0_9        : aliased IOCON_PIO0_9_Register; 
-    IOCON_SWCLK_PIO0_10 : aliased IOCON_PIO0_10_Register;
+    IOCON_SWCLK_PIO0_10 : aliased IOCON_SWCLK_PIO0_10_Register;
     IOCON_PIO1_10       : aliased IOCON_PIO1_10_Register;
     IOCON_PIO2_11       : aliased IOCON_PIO2_11_Register;
     IOCON_R_PIO0_11     : aliased IOCON_R_PIO0_11_Register;
@@ -196,7 +201,7 @@ package Interfaces.LPC1114.IOCON is
   end record
     with Volatile;
 
-  for SYSCON use record
+  for IOCON use record
     IOCON_PIO2_6        at 16#00# range 0..31;
     Reserved0           at 16#04# range 0..31;
     IOCON_PIO2_0        at 16#08# range 0..31;

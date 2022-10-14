@@ -4,7 +4,7 @@ with System;
 
 package Interfaces.LPC1114.ADC is
   pragma Preelaborate;
-  pragma No_Elaborate_Code_All;
+  pragma No_Elaboration_Code_All;
 
   ---------------
   -- Registers --
@@ -63,7 +63,7 @@ package Interfaces.LPC1114.ADC is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for AD0DGR_Register use record
+  for AD0DR_Register use record
     Reserved_0_5 at 0 range 0..5;
     V_VREF at 0 range 6..15;
     Reserved_16_23 at 0 range 16..23;

@@ -10,10 +10,10 @@ package Interfaces.LPC1114.WDT is
   -- Registers --
   ---------------
 
-  subtype WDMOD_WDEN_Field is Intefaces.LPC1114.Bit;
-  subtype WDMOD_WDRESET_Field is Intefaces.LPC1114.Bit;
-  subtype WDMOD_WDTOF_Field is Intefaces.LPC1114.Bit;
-  subtype WDMOD_WDINT_Field is Intefaces.LPC1114.Bit;
+  subtype WDMOD_WDEN_Field is Interfaces.LPC1114.Bit;
+  subtype WDMOD_WDRESET_Field is Interfaces.LPC1114.Bit;
+  subtype WDMOD_WDTOF_Field is Interfaces.LPC1114.Bit;
+  subtype WDMOD_WDINT_Field is Interfaces.LPC1114.Bit;
 
   -- Watchdog Mode Register
   type WDMOD_Register is record
@@ -23,7 +23,7 @@ package Interfaces.LPC1114.WDT is
     WDINT : WDMOD_WDINT_Field := 0;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_7 : Interfaces.LPC1114.UInt4;
-    Reserced_8_31 : Interfaces.LPC1114.UInt24;
+    Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -71,17 +71,17 @@ package Interfaces.LPC1114.WDT is
   end record;
 
 
-  subtype WDTC_Count_Field is Interfaces.LPC1114.UInt24;
+  subtype WDTV_Count_Field is Interfaces.LPC1114.UInt24;
 
   -- Watchdog Timer Value Register
-  type WDTC_Register is record
-    Count : WDTC_Count_Field := 16#000000FF#;
+  type WDTV_Register is record
+    Count : WDTV_Count_Field := 16#000000FF#;
     Reserved_24_31 : Interfaces.LPC1114.Byte;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for WDTC_Register use record
+  for WDTV_Register use record
     Count at 0 range 0..23;
     Reserved_24_31 at 0 range 24..31;
   end record;

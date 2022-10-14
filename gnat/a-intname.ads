@@ -1,3 +1,5 @@
+pragma Style_Checks (off);
+
 package Ada.Interrupts.Names is
 
   pragma Implementation_Defined;

@@ -28,7 +28,7 @@ package Interfaces.LPC1114.SPI is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SSPCRO_Register use record
+  for SSPCR0_Register use record
     DSS at 0 range 0..3;
     FRF at 0 range 4..5;
     CPOL at 0 range 6..6;
@@ -113,13 +113,13 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Clock Prescale Register
   type SSPCPSR_Register is record
-    CPSDVSR : SSPCPSR_SSPCPSDVSR_Field := 0;
+    CPSDVSR : SSPCPSR_CPSDVSR_Field := 0;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SSPCPSP_Register use record
+  for SSPCPSR_Register use record
     CPSDVSR at 0 range 0..7;
     Reserved_8_31 at 0 range 8..31;
   end record;
@@ -142,7 +142,7 @@ package Interfaces.LPC1114.SPI is
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
-  for SSPLIMSC_Register use record
+  for SSPIMSC_Register use record
     RORIM at 0 range 0..0;
     RTIM at 0 range 1..1;
     RXIM at 0 range 2..2;

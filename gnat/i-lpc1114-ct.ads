@@ -165,9 +165,9 @@ package Interfaces.LPC1114.CT is
 
   -- Capture Control Register
   type TMRCCR_Register is record
-    CAP0RE : TMRCCR_CAP0RE_Field : 0;
-    CAP0FE : TMRCCR_CAP0FE_Field : 0;
-    CAP0I : TMRCCR_CAP0I_Field : 0;
+    CAP0RE : TMRCCR_CAP0RE_Field := 0;
+    CAP0FE : TMRCCR_CAP0FE_Field := 0;
+    CAP0I : TMRCCR_CAP0I_Field := 0;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_3_31 : Interfaces.LPC1114.UInt29;
   end record
@@ -230,8 +230,8 @@ package Interfaces.LPC1114.CT is
   end record;
 
 
-  subtype TMRCTCR_CTM_Field is Intefaces.LPC1114.UInt2;
-  subtype TMRCTCR_CIS_Field is Intefaces.LPC1114.UInt2;
+  subtype TMRCTCR_CTM_Field is Interfaces.LPC1114.UInt2;
+  subtype TMRCTCR_CIS_Field is Interfaces.LPC1114.UInt2;
 
   -- Count Control Register
   type TMRCTCR_Register is record
@@ -254,16 +254,25 @@ package Interfaces.LPC1114.CT is
 
   -- PWM Control Register
   type TMRPWMC_Register is record
-    PWMEN0 : TMRPWMC_PWMEN_Field : 0;
-    PWMEN1 : TMRPWMC_PWMEN_Field : 0;
-    PWMEN2 : TMRPWMC_PWMEN_Field : 0;
-    PWMEN3 : TMRPWMC_PWMEN_Field : 0;
+    PWMEN0 : TMRPWMC_PWMEN_Field := 0;
+    PWMEN1 : TMRPWMC_PWMEN_Field := 0;
+    PWMEN2 : TMRPWMC_PWMEN_Field := 0;
+    PWMEN3 : TMRPWMC_PWMEN_Field := 0;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_31 : Interfaces.LPC1114.UInt28;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
 
+  for TMRPWMC_Register use record
+    PWMEN0 at 0 range 0..0;
+    PWMEN1 at 0 range 1..1;
+    PWMEN2 at 0 range 2..2;
+    PWMEN3 at 0 range 3..3;
+    Reserved_4_31 at 0 range 4..31;
+  end record;
+
+  type Reserved_Space is array (Integer range <>) of Interfaces.LPC1114.UInt32;
 
   type CT16B0 is record
     TMR16B0IR   : aliased TMRIR_Register;
@@ -278,9 +287,9 @@ package Interfaces.LPC1114.CT is
     TMR16B0MR3  : aliased TMRMR_Register;
     TMR16B0CCR  : aliased TMRCCR_Register;
     TMR16B0CR0  : aliased TMRCR0_Register;
-    Reserved0   : Array 3 of Interfaces.LPC1114.UInt32;
+    Reserved0   : aliased Reserved_Space (0..2);
     TMR16B0EMR  : aliased TMREMR_Register;
-    Reserved1   : Array 12 of Interfaces.LPC1114.UInt32;
+    Reserved1   : aliased Reserved_Space (0..11);
     TMR16B0CTCR : aliased TMRCTCR_Register;
     TMR16B0PWMC : aliased TMRPWMC_Register;
   end record
@@ -299,9 +308,9 @@ package Interfaces.LPC1114.CT is
     TMR16B0MR3  at 16#24# range 0..31;
     TMR16B0CCR  at 16#28# range 0..31;
     TMR16B0CR0  at 16#2C# range 0..31;
-    Reserved0   at 16#30# range 0..31;
+    Reserved0   at 16#30# range 0..95;
     TMR16B0EMR  at 16#3C# range 0..31;
-    Reserved1   at 16#40# range 0..31;
+    Reserved1   at 16#40# range 0..383;
     TMR16B0CTCR at 16#70# range 0..31;
     TMR16B0PWMC at 16#74# range 0..31;
   end record;
@@ -319,9 +328,9 @@ package Interfaces.LPC1114.CT is
     TMR16B1MR3  : aliased TMRMR_Register;
     TMR16B1CCR  : aliased TMRCCR_Register;
     TMR16B1CR0  : aliased TMRCR0_Register;
-    Reserved0   : Array 3 of Interfaces.LPC1114.UInt32;
+    Reserved0   : aliased Reserved_Space (0..2);
     TMR16B1EMR  : aliased TMREMR_Register;
-    Reserved1   : Array 12 of Interfaces.LPC1114.UInt32;
+    Reserved1   : aliased Reserved_Space (0..11);
     TMR16B1CTCR : aliased TMRCTCR_Register;
     TMR16B1PWMC : aliased TMRPWMC_Register;
   end record
@@ -340,9 +349,9 @@ package Interfaces.LPC1114.CT is
     TMR16B1MR3  at 16#24# range 0..31;
     TMR16B1CCR  at 16#28# range 0..31;
     TMR16B1CR0  at 16#2C# range 0..31;
-    Reserved0   at 16#30# range 0..31;
+    Reserved0   at 16#30# range 0..95;
     TMR16B1EMR  at 16#3C# range 0..31;
-    Reserved1   at 16#40# range 0..31;
+    Reserved1   at 16#40# range 0..383;
     TMR16B1CTCR at 16#70# range 0..31;
     TMR16B1PWMC at 16#74# range 0..31;
   end record;
@@ -361,9 +370,9 @@ package Interfaces.LPC1114.CT is
     TMR32B0MR3  : aliased TMRMR_Register;
     TMR32B0CCR  : aliased TMRCCR_Register;
     TMR32B0CR0  : aliased TMRCR0_Register;
-    Reserved0   : Array 3 of Interfaces.LPC1114.UInt32;
+    Reserved0   : aliased Reserved_Space (0..2);
     TMR32B0EMR  : aliased TMREMR_Register;
-    Reserved1   : Array 12 of Interfaces.LPC1114.UInt32;
+    Reserved1   : aliased Reserved_Space (0..11);
     TMR32B0CTCR : aliased TMRCTCR_Register;
     TMR32B0PWMC : aliased TMRPWMC_Register;
   end record
@@ -382,9 +391,9 @@ package Interfaces.LPC1114.CT is
     TMR32B0MR3  at 16#24# range 0..31;
     TMR32B0CCR  at 16#28# range 0..31;
     TMR32B0CR0  at 16#2C# range 0..31;
-    Reserved0   at 16#30# range 0..31;
+    Reserved0   at 16#30# range 0..95;
     TMR32B0EMR  at 16#3C# range 0..31;
-    Reserved1   at 16#40# range 0..31;
+    Reserved1   at 16#40# range 0..383;
     TMR32B0CTCR at 16#70# range 0..31;
     TMR32B0PWMC at 16#74# range 0..31;
   end record;
@@ -402,9 +411,9 @@ package Interfaces.LPC1114.CT is
     TMR32B1MR3  : aliased TMRMR_Register;
     TMR32B1CCR  : aliased TMRCCR_Register;
     TMR32B1CR0  : aliased TMRCR0_Register;
-    Reserved0   : Array 3 of Interfaces.LPC1114.UInt32;
+    Reserved0   : aliased Reserved_Space (0..2);
     TMR32B1EMR  : aliased TMREMR_Register;
-    Reserved1   : Array 12 of Interfaces.LPC1114.UInt32;
+    Reserved1   : aliased Reserved_Space (0..11);
     TMR32B1CTCR : aliased TMRCTCR_Register;
     TMR32B1PWMC : aliased TMRPWMC_Register;
   end record
@@ -423,9 +432,9 @@ package Interfaces.LPC1114.CT is
     TMR32B1MR3  at 16#24# range 0..31;
     TMR32B1CCR  at 16#28# range 0..31;
     TMR32B1CR0  at 16#2C# range 0..31;
-    Reserved0   at 16#30# range 0..31;
+    Reserved0   at 16#30# range 0..95;
     TMR32B1EMR  at 16#3C# range 0..31;
-    Reserved1   at 16#40# range 0..31;
+    Reserved1   at 16#40# range 0..383;
     TMR32B1CTCR at 16#70# range 0..31;
     TMR32B1PWMC at 16#74# range 0..31;
   end record;
@@ -440,7 +449,7 @@ package Interfaces.LPC1114.CT is
   CT32B0_Block : aliased CT32B0
     with Import, Address => CT32B0_Base;
 
-  CT32B1_Block : aliasesd CT32B1
+  CT32B1_Block : aliased CT32B1
     with Import, Address => CT32B1_Base;
 
 end Interfaces.LPC1114.CT;
