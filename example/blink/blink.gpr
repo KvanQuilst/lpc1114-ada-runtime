@@ -1,0 +1,4 @@
+project Blink is
+  for Main use ("blink.adb");
+end Blink;
+
