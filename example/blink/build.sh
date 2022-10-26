@@ -1,1 +1,1 @@
-gprbuild --target=arm-eabi --RTS=../.. -vl blink.gpr
+gprbuild --target=arm-eabi --RTS=../.. -vh -P blink.gpr

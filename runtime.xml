@@ -30,7 +30,7 @@
       package Linker is
         for Required_Switches use Linker'Required_Switches &
           ("-Wl,-L${RUNTIME_DIR(Ada)}/adalib",
-           "-nostartfiles", "nolibc",
+           "-nostartfiles", "-nolibc",
            "-L${RUNTIME_DIR(ada)}/ld_user",
            "-L${RUNTIME_DIR(ada)}/ld") &
           Compiler.Common_Required_Switches;
@@ -38,7 +38,7 @@
         case Loaders is
           when "ROM" =>
             for Required_Switches use Linker'Required_Switches &
-              ("-T", "common-ROM.ld");
+              ("-T", "lpc1114.ld");
           when "RAM" =>
             for Required_Switches use Linker'Required_Switches &
               ("-T", "common-RAM.ld");
