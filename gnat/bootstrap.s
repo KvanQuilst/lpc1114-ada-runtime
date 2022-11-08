@@ -1,16 +1,22 @@
+  .syntax unified
+  .cpu cortex-m0
+  .thumb
+  
+  .text
   .section .vectors,"a"
-  .global .vectors
+  .globl __vectors
+  .align 8
 __vectors:
-	b.w		__INITIAL_SP			/* stack top address */
+	.word __INITIAL_SP			/* stack top address */
 	.word	__reset						/* reset function pointer */
-	.word hang							/* NMI */
-	.word hang							/* Hardfault */
+	.word 0		    					/* NMI */
+	.word 0       /* Hardfault */
 	.word 0, 0, 0						/* Reserved */
 	.word __VECTOR_CHECKSUM
 	.word 0, 0, 0						/* Reserved */
-	.word hang							/* SVCall */
+	.word 0							/* SVCall */
 	.word 0, 0							/* Reserved */
-	.word hang							/* PendSV */
+	.word 0							/* PendSV */
 	.word SysTick_Handler		/* System Tick */
 
 	.word CCAN_IrqHandler		/* 13 C_CAN */
@@ -34,36 +40,79 @@ __vectors:
 	.word PIO0_IrqHandler		/* 31 Parallel IO Controller 0 */
 
 
-  .section .text
-  .global __reset
+  .text
+  .thumb_func
+  .globl __reset
 __reset:
-  ldr   r0, .L3+0  //LMA
-  ldr   r1, .L3+4  //VMA
-  ldr   r2, .L3+8  //END
+  ldr   r0, =__DATA_LMA
+  ldr   r1, =__DATA_VMA
+  ldr   r2, =__DATA_END
   b .L5
 .L4:
   ldr   r3, [r0]
   str   r3, [r1]
-  add   r0, #4
-  add 	r0, #4
+  adds  r0, #4
+  adds	r1, #4
 .L5:
   cmp	  r1, r2
   bne	  .L4
-  ldr	  r0, .L3 + 12
-  ldr   r2, .L3 + 16
-  eor   r3, r3
+  ldr   r0, =__BSS_VMA
+  ldr   r2, =__BSS_END
+  eors  r3, r3
   b     .L7
 .L6:
   str   r3, [r0]
-  add   r0, #4
+  adds  r0, #4
 .L7:
   cmp   r0, r2
   bne   .L6
   bl    main
   .align 2
 .L3:
-  .word __DATA_LMA  //0
-  .word __DATA_VMA  //4
-  .word __DATA_END  //8
-  .word __BSS_VMA   //12
-  .word __BSS_END   //16
+  .word __DATA_LMA
+  .word __DATA_VMA
+  .word __DATA_END
+  .word __BSS_VMA
+  .word __BSS_END
+
+
+  .thumb_func
+hang: b .
+
+
+  .thumb_func
+  .global __hardfault
+__hardfault: 
+  wfi
+  b     __hardfault
+  ldr   r0, =interrupts__hardfault
+  tst   r0, r0
+  beq   .L1
+  blx   r0
+.L1:
+  b     hang
+  .align 2
+
+ /* Weak Symbols */
+  .weak interrupts__hardfault
+	.weak SysTick_Handler		/* System Tick */
+
+	.weak CCAN_IrqHandler		/* 13 C_CAN */
+	.weak SPI0_IrqHandler		/* 14 Synchronous Serial Port 0 */
+	.weak I2C_IrqHandler		/* 15 I2C */
+	.weak CT16B0_IrqHandler /* 16 16bit Counter/Timer 0 */
+	.weak CT16B1_IrqHandler /* 17 16bit Counter/Timer 1 */
+	.weak CT32B0_IrqHandler /* 18 32bit Counter/Timer 0 */
+	.weak CT32B1_IrqHandler /* 19 32bit Counter/Timer 1 */
+	.weak SPI1_IrqHandler		/* 20 Synchornous Serial Port 1 */
+	.weak UART_IrqHandler		/* 21 UART */
+	.weak IrqHandlerNotUsed /* 22 Reserved */
+	.weak IrqHandlerNotUsed /* 23 Reserved */
+	.weak ADC_IrqHandler		/* 24 ADC Controller */
+	.weak	WDT_IrqHandler		/* 25 Watchdog Timer */
+	.weak BOD_IrqHandler		/* 26 Brown-Out Detect */
+  .weak IrqHandlerNotUsed /* 27 Reserved */
+	.weak PIO3_IrqHandler		/* 28 Parallel IO Controller 3 */
+	.weak PIO2_IrqHandler		/* 29 Parallel IO Controller 2 */
+	.weak PIO1_IrqHandler		/* 30 Parallel IO Controller 1 */
+	.weak PIO0_IrqHandler		/* 31 Parallel IO Controller 0 */

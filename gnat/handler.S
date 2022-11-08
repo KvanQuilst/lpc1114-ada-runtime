@@ -8,7 +8,7 @@
 
 __vectors:
   /* Cortex-M Core Interrupts */
-  .word   0                    /* stack top address */
+  .word   __INITIAL_SP         /* stack top address */
   .word   fault                /* 1 Reset */
   .word   fault                /* 2 NMI */
   .word   fault                /* 3 HardFault */

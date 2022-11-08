@@ -2,22 +2,24 @@ pragma Style_Checks (off);
 
 pragma Warnings (Off);
 with System;      use System;
+with System.Machine_Code; use System.Machine_Code;
 with Interfaces;  use Interfaces;
 with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
+--with Interrupts;
 --with LPC1114;     use LPC1114;
 pragma Warnings (On);
 
 procedure Blink is
 
-  Scale : constant := 5000;
-  Dot : constant := 25 * Scale;
-  Dash : constant := 75 * Scale;
-  InDot : constant := 25 * Scale;
+  Scale  : constant := 2500;
+  Dot    : constant := 25 * Scale;
+  Dash   : constant := 75 * Scale;
+  InDot  : constant := 25 * Scale;
   InChar : constant := 50 * Scale;
   InWord : constant := 150 * Scale;
 
   type Morse is mod 4;
-  type Char_Arr is array (Integer range <>) of Morse;
+  type Char_Arr is array (Natural range <>) of Morse;
   Hello_World : constant Char_Arr := (
     0,0,0,0,2,  -- H
     0,2,        -- E
@@ -33,32 +35,45 @@ procedure Blink is
     3           --
     );
 
-  GPIO : GPIO1;
-
   procedure Wait (Time : Integer) is
   begin
     for I in 0 .. Time loop
-      null;
+      Asm ("nop");
     end loop;
   end Wait;
 
 begin
 
-  -- Turn PIO1_9 on
-  GPIO.GPIO_DIR.IO9 := 2#1#;
+  GPIO0.GPIO_DIR.IO7 := 2#1#;
 
+  -- Set PIO1_9 as output
+  GPIO1.GPIO_DIR.IO9 := 2#1#;
+  
+--loop
+--  GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
+--  GPIO0.GPIO_DATA (2**7).DATA := 0;
+--  Wait (125000);
+--  GPIO1.GPIO_DATA (2**9).DATA := 0;
+--  GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
+--  Wait (125000);
+--end loop;
+  
   loop
     for I in Hello_World'Range loop
       case Hello_World (I) is
         when 0 =>
-          GPIO.GPIO_DATA (2**9) .DATA := GPIO_DATA_Field'Last;
+          GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
+          GPIO0.GPIO_DATA (2**7).DATA := 0;
           Wait (Dot);          
-          GPIO.GPIO_DATA (2**9) .DATA:= 0;
+          GPIO1.GPIO_DATA (2**9).DATA:= 0;
+          GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 1 =>
-          GPIO.GPIO_DATA (2**9) .DATA := GPIO_DATA_Field'Last;
+          GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
+          GPIO0.GPIO_DATA (2**7).DATA := 0;
           Wait (Dash);
-          GPIO.GPIO_DATA (2**9) .DATA:= 0;
+          GPIO1.GPIO_DATA (2**9).DATA:= 0;
+          GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 2 =>
           Wait (InChar);

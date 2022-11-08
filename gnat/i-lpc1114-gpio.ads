@@ -164,8 +164,8 @@ package Interfaces.LPC1114.GPIO is
   type Reserved_Space is array (Integer range <>) of Interfaces.LPC1114.UInt32;
 
   type GPIO is record
-    GPIO_DATA : aliased GPIODATA_Array (0..2#100000000000#-1);
-    Reserved  : aliased Reserved_Space (0..4095);
+    GPIO_DATA : aliased GPIODATA_Array (0..16#0FFF#);
+    Reserved  : aliased Reserved_Space (0..16#0FFF#);
     GPIO_DIR  : aliased GPIODIR_Register;
     GPIO_IS   : aliased GPIOIS_Register;
     GPIO_IBE  : aliased GPIOIBE_Register;
@@ -178,8 +178,8 @@ package Interfaces.LPC1114.GPIO is
     with Volatile;
 
   for GPIO use record
-    GPIO_DATA at 16#0000# range 0..16#10000#-1;
-    Reserved  at 16#4000# range 0..16#20000#-1;
+    GPIO_DATA at 16#0000# range 0..16#2000_0#-1;
+    Reserved  at 16#4000# range 0..16#2000_0#-1;
     GPIO_DIR  at 16#8000# range 0..31;
     GPIO_IS   at 16#8004# range 0..31;
     GPIO_IBE  at 16#8008# range 0..31;
@@ -190,22 +190,16 @@ package Interfaces.LPC1114.GPIO is
     GPIO_IC   at 16#801C# range 0..31;
   end record;
 
-  subtype GPIO0 is GPIO;
-  subtype GPIO1 is GPIO;
-  subtype GPIO2 is GPIO;
-  subtype GPIO3 is GPIO;
-
-
-  GPIO0_Block : aliased GPIO0
+  GPIO0 : aliased GPIO
     with Import, Address => GPIO0_Base;
 
-  GPIO1_Block : aliased GPIO1
+  GPIO1 : aliased GPIO
     with Import, Address => GPIO1_Base;
 
-  GPIO2_Block : aliased GPIO2
+  GPIO2 : aliased GPIO
     with Import, Address => GPIO2_Base;
 
-  GPIO3_Block : aliased GPIO3
+  GPIO3 : aliased GPIO
     with Import, Address => GPIO3_Base;
 
 
