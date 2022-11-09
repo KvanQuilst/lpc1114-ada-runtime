@@ -5,8 +5,6 @@ with System;      use System;
 with System.Machine_Code; use System.Machine_Code;
 with Interfaces;  use Interfaces;
 with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
---with Interrupts;
---with LPC1114;     use LPC1114;
 pragma Warnings (On);
 
 procedure Blink is
@@ -44,36 +42,26 @@ procedure Blink is
 
 begin
 
-  GPIO0.GPIO_DIR.IO7 := 2#1#;
-
-  -- Set PIO1_9 as output
-  GPIO1.GPIO_DIR.IO9 := 2#1#;
-  
---loop
---  GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
---  GPIO0.GPIO_DATA (2**7).DATA := 0;
---  Wait (125000);
---  GPIO1.GPIO_DATA (2**9).DATA := 0;
---  GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
---  Wait (125000);
---end loop;
+  -- Set pins PIO0_7 and PIO1_9 to output
+  GPIO0.DIR.IO7 := 2#1#;
+  GPIO1.DIR.IO9 := 2#1#;
   
   loop
     for I in Hello_World'Range loop
       case Hello_World (I) is
         when 0 =>
-          GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          GPIO0.GPIO_DATA (2**7).DATA := 0;
+          GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
+          GPIO0.DATA (2**7).DATA := 0;
           Wait (Dot);          
-          GPIO1.GPIO_DATA (2**9).DATA:= 0;
-          GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
+          GPIO1.DATA (2**9).DATA:= 0;
+          GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 1 =>
-          GPIO1.GPIO_DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          GPIO0.GPIO_DATA (2**7).DATA := 0;
+          GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
+          GPIO0.DATA (2**7).DATA := 0;
           Wait (Dash);
-          GPIO1.GPIO_DATA (2**9).DATA:= 0;
-          GPIO0.GPIO_DATA (2**7).DATA := GPIO_DATA_Field'Last;
+          GPIO1.DATA (2**9).DATA:= 0;
+          GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 2 =>
           Wait (InChar);
