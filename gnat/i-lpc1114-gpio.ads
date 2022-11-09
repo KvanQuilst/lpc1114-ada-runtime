@@ -33,18 +33,18 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIODIR_Register is record
-    IO0 : GPIO_IO_Field := 2#0#;
-    IO1 : GPIO_IO_Field := 2#0#;
-    IO2 : GPIO_IO_Field := 2#0#;
-    IO3 : GPIO_IO_Field := 2#0#;
-    IO4 : GPIO_IO_Field := 2#0#;
-    IO5 : GPIO_IO_Field := 2#0#;
-    IO6 : GPIO_IO_Field := 2#0#;
-    IO7 : GPIO_IO_Field := 2#0#;
-    IO8 : GPIO_IO_Field := 2#0#;
-    IO9 : GPIO_IO_Field := 2#0#;
-    IO10 : GPIO_IO_Field := 2#0#;
-    IO11 : GPIO_IO_Field := 2#0#;
+    IO0 : GPIO_IO_Field;
+    IO1 : GPIO_IO_Field;
+    IO2 : GPIO_IO_Field;
+    IO3 : GPIO_IO_Field;
+    IO4 : GPIO_IO_Field;
+    IO5 : GPIO_IO_Field;
+    IO6 : GPIO_IO_Field;
+    IO7 : GPIO_IO_Field;
+    IO8 : GPIO_IO_Field;
+    IO9 : GPIO_IO_Field;
+    IO10 : GPIO_IO_Field;
+    IO11 : GPIO_IO_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -68,7 +68,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIS_Register is record
-    ISENSE : GPIO_ISENSE_Field := 16#00#;
+    ISENSE : GPIO_ISENSE_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -81,7 +81,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIBE_Register is record
-    IBE : GPIO_IBE_Field := 16#00#;
+    IBE : GPIO_IBE_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -94,7 +94,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIEV_Register is record
-    IEV : GPIO_IEV_Field := 16#00#;
+    IEV : GPIO_IEV_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -107,7 +107,7 @@ package Interfaces.LPC1114.GPIO is
 
 
   type GPIOIE_Register is record
-    MASK : GPIO_MASK_Field := 16#00#;
+    MASK : GPIO_MASK_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -121,7 +121,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- READ ONLY --
   type GPIORIS_Register is record
-    RAWST : GPIO_RAWST_Field := 16#00#;
+    RAWST : GPIO_RAWST_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -135,7 +135,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- READ ONLY --
   type GPIOMIS_Register is record
-    MASK : GPIO_MASK_Field := 16#00#;
+    MASK : GPIO_MASK_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -149,7 +149,7 @@ package Interfaces.LPC1114.GPIO is
 
   -- WRITE ONLY --
   type GPIOIC_Register is record
-    CLR : GPIO_CLR_Field := 16#00#;
+    CLR : GPIO_CLR_Field;
     Reserved_12_31 : Interfaces.LPC1114.UInt20;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -163,43 +163,43 @@ package Interfaces.LPC1114.GPIO is
   type GPIODATA_Array is array (Integer range <>) of GPIODATA_Register;
   type Reserved_Space is array (Integer range <>) of Interfaces.LPC1114.UInt32;
 
-  type GPIO is record
-    GPIO_DATA : aliased GPIODATA_Array (0..16#0FFF#);
+  type GPIO_Peripheral is record
+    DATA : aliased GPIODATA_Array (0..16#0FFF#);
     Reserved  : aliased Reserved_Space (0..16#0FFF#);
-    GPIO_DIR  : aliased GPIODIR_Register;
-    GPIO_IS   : aliased GPIOIS_Register;
-    GPIO_IBE  : aliased GPIOIBE_Register;
-    GPIO_IEV  : aliased GPIOIEV_Register;
-    GPIO_IE   : aliased GPIOIE_Register;
-    GPIO_RIS  : aliased GPIORIS_Register;
-    GPIO_MIS  : aliased GPIOMIS_Register;
-    GPIO_IC   : aliased GPIOIC_Register;
+    DIR  : aliased GPIODIR_Register;
+    ISR  : aliased GPIOIS_Register;
+    IBE  : aliased GPIOIBE_Register;
+    IEV  : aliased GPIOIEV_Register;
+    IE   : aliased GPIOIE_Register;
+    RIS  : aliased GPIORIS_Register;
+    MIS  : aliased GPIOMIS_Register;
+    IC   : aliased GPIOIC_Register;
   end record
     with Volatile;
 
-  for GPIO use record
-    GPIO_DATA at 16#0000# range 0..16#2000_0#-1;
+  for GPIO_Peripheral use record
+    DATA at 16#0000# range 0..16#2000_0#-1;
     Reserved  at 16#4000# range 0..16#2000_0#-1;
-    GPIO_DIR  at 16#8000# range 0..31;
-    GPIO_IS   at 16#8004# range 0..31;
-    GPIO_IBE  at 16#8008# range 0..31;
-    GPIO_IEV  at 16#800C# range 0..31;
-    GPIO_IE   at 16#8010# range 0..31;
-    GPIO_RIS  at 16#8014# range 0..31;
-    GPIO_MIS  at 16#8018# range 0..31;
-    GPIO_IC   at 16#801C# range 0..31;
+    DIR  at 16#8000# range 0..31;
+    ISR  at 16#8004# range 0..31;
+    IBE  at 16#8008# range 0..31;
+    IEV  at 16#800C# range 0..31;
+    IE   at 16#8010# range 0..31;
+    RIS  at 16#8014# range 0..31;
+    MIS  at 16#8018# range 0..31;
+    IC   at 16#801C# range 0..31;
   end record;
 
-  GPIO0 : aliased GPIO
+  GPIO0 : aliased GPIO_Peripheral
     with Import, Address => GPIO0_Base;
 
-  GPIO1 : aliased GPIO
+  GPIO1 : aliased GPIO_Peripheral
     with Import, Address => GPIO1_Base;
 
-  GPIO2 : aliased GPIO
+  GPIO2 : aliased GPIO_Peripheral
     with Import, Address => GPIO2_Base;
 
-  GPIO3 : aliased GPIO
+  GPIO3 : aliased GPIO_Peripheral
     with Import, Address => GPIO3_Base;
 
 

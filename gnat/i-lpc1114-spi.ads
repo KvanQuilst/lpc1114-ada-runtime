@@ -18,11 +18,11 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Control Register 0
   type SSPCR0_Register is record
-    DSS : SSPCR0_DSS_Field := 2#0000#;
-    FRF : SSPCR0_FRF_Field := 2#00#;
-    CPOL : SSPCR0_CPOL_Field := 2#0#;
-    CPHA : SSPCR0_CPHA_Field := 2#0#;
-    SCR : SSPCR0_SCR_Field := 16#00#;
+    DSS : SSPCR0_DSS_Field;
+    FRF : SSPCR0_FRF_Field;
+    CPOL : SSPCR0_CPOL_Field;
+    CPHA : SSPCR0_CPHA_Field;
+    SCR : SSPCR0_SCR_Field;
     Reserved_16_31 : Interfaces.LPC1114.UInt16;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -45,10 +45,10 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Control Register 1
   type SSPCR1_Register is record
-    LBM : SSPCR1_LBM_Field := 0;
-    SSE : SSPCR1_SSE_Field := 0;
-    MS : SSPCR1_MS_Field := 0;
-    SOD : SSPCR1_SOD_Field := 0;
+    LBM : SSPCR1_LBM_Field;
+    SSE : SSPCR1_SSE_Field;
+    MS : SSPCR1_MS_Field;
+    SOD : SSPCR1_SOD_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_31 : Interfaces.LPC1114.UInt28;
   end record
@@ -68,7 +68,7 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Data Register
   type SSPDR_Register is record
-    DATA : SSPDR_DATA_Field := 16#0000#;
+    DATA : SSPDR_DATA_Field;
     Reserved_16_31 : Interfaces.LPC1114.UInt16;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -88,11 +88,11 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Status Register
   type SSPSR_Register is record
-    TFE : SSPSR_TFE_Field := 1;
-    TNF : SSPSR_TNF_Field := 1;
-    RNE : SSPSR_RNE_Field := 0;
-    RFF : SSPSR_RFF_Field := 0;
-    BSY : SSPSR_BSY_Field := 0;
+    TFE : SSPSR_TFE_Field;
+    TNF : SSPSR_TNF_Field;
+    RNE : SSPSR_RNE_Field;
+    RFF : SSPSR_RFF_Field;
+    BSY : SSPSR_BSY_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_5_31 : Interfaces.LPC1114.UInt27;
   end record
@@ -113,7 +113,7 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Clock Prescale Register
   type SSPCPSR_Register is record
-    CPSDVSR : SSPCPSR_CPSDVSR_Field := 0;
+    CPSDVSR : SSPCPSR_CPSDVSR_Field;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -132,10 +132,10 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Interrupt Mask Set/Clear Register
   type SSPIMSC_Register is record
-    RORIM : SSPIMSC_RORIM_Field := 0;
-    RTIM : SSPIMSC_RTIM_Field := 0;
-    RXIM : SSPIMSC_RXIM_Field := 0;
-    TXIM : SSPIMSC_TXIM_Field := 0;
+    RORIM : SSPIMSC_RORIM_Field;
+    RTIM : SSPIMSC_RTIM_Field;
+    RXIM : SSPIMSC_RXIM_Field;
+    TXIM : SSPIMSC_TXIM_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_31 : Interfaces.LPC1114.UInt28;
   end record
@@ -158,10 +158,10 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Raw Interrupt Status Regsiter
   type SSPRIS_Register is record
-    RORRIS : SSPRIS_RORRIS_Field := 0;
-    RTRIS : SSPRIS_RTRIS_Field := 0;
-    RXRIS : SSPRIS_RXRIS_Field := 0;
-    TXRIS : SSPRIS_TXRIS_Field := 0;
+    RORRIS : SSPRIS_RORRIS_Field;
+    RTRIS : SSPRIS_RTRIS_Field;
+    RXRIS : SSPRIS_RXRIS_Field;
+    TXRIS : SSPRIS_TXRIS_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_31 : Interfaces.LPC1114.UInt28;
   end record
@@ -184,10 +184,10 @@ package Interfaces.LPC1114.SPI is
 
   -- SPI/SSP Maksed Interrupt Status Register
   type SSPMIS_Register is record
-    RORMIS : SSPMIS_RORMIS_Field := 0;
-    RTMIS : SSPMIS_RTMIS_Field := 0;
-    RXMIS : SSPMIS_RXMIS_Field := 0;
-    TXMIS : SSPMIS_TXMIS_Field := 0;
+    RORMIS : SSPMIS_RORMIS_Field;
+    RTMIS : SSPMIS_RTMIS_Field;
+    RXMIS : SSPMIS_RXMIS_Field;
+    TXMIS : SSPMIS_TXMIS_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_31 : Interfaces.LPC1114.UInt28;
   end record
@@ -222,61 +222,36 @@ package Interfaces.LPC1114.SPI is
   end record;
 
 
-  type SPI0 is record
-    SSP0CR0  : aliased SSPCR0_Register;
-    SSP0CR1  : aliased SSPCR1_Register;
-    SSP0DR   : aliased SSPDR_Register;
-    SSP0SR   : aliased SSPSR_Register;
-    SSP0CPSR : aliased SSPCPSR_Register;
-    SSP0IMSC : aliased SSPIMSC_Register;
-    SSP0RIS  : aliased SSPRIS_Register;
-    SSP0MIS  : aliased SSPMIS_Register;
-    SSP0ICR  : aliased SSPICR_Register;
+  type SPI_Peripheral is record
+    CR0  : aliased SSPCR0_Register;
+    CR1  : aliased SSPCR1_Register;
+    DR   : aliased SSPDR_Register;
+    SR   : aliased SSPSR_Register;
+    CPSR : aliased SSPCPSR_Register;
+    IMSC : aliased SSPIMSC_Register;
+    RIS  : aliased SSPRIS_Register;
+    MIS  : aliased SSPMIS_Register;
+    ICR  : aliased SSPICR_Register;
   end record
     with Volatile;
 
-  for SPI0 use record
-    SSP0CR0  at 16#00# range 0..31;
-    SSP0CR1  at 16#04# range 0..31;
-    SSP0DR   at 16#08# range 0..31;
-    SSP0SR   at 16#0C# range 0..31;
-    SSP0CPSR at 16#10# range 0..31;
-    SSP0IMSC at 16#14# range 0..31;
-    SSP0RIS  at 16#18# range 0..31;
-    SSP0MIS  at 16#1C# range 0..31;
-    SSP0ICR  at 16#20# range 0..31;
-  end record;
-
-  type SPI1 is record
-    SSP1CR0  : aliased SSPCR0_Register;
-    SSP1CR1  : aliased SSPCR1_Register;
-    SSP1DR   : aliased SSPDR_Register;
-    SSP1SR   : aliased SSPSR_Register;
-    SSP1CPSR : aliased SSPCPSR_Register;
-    SSP1IMSC : aliased SSPIMSC_Register;
-    SSP1RIS  : aliased SSPRIS_Register;
-    SSP1MIS  : aliased SSPMIS_Register;
-    SSP1ICR  : aliased SSPICR_Register;
-  end record
-    with Volatile;
-
-  for SPI1 use record
-    SSP1CR0  at 16#00# range 0..31;
-    SSP1CR1  at 16#04# range 0..31;
-    SSP1DR   at 16#08# range 0..31;
-    SSP1SR   at 16#0C# range 0..31;
-    SSP1CPSR at 16#10# range 0..31;
-    SSP1IMSC at 16#14# range 0..31;
-    SSP1RIS  at 16#18# range 0..31;
-    SSP1MIS  at 16#1C# range 0..31;
-    SSP1ICR  at 16#20# range 0..31;
+  for SPI_Peripheral use record
+    CR0  at 16#00# range 0..31;
+    CR1  at 16#04# range 0..31;
+    DR   at 16#08# range 0..31;
+    SR   at 16#0C# range 0..31;
+    CPSR at 16#10# range 0..31;
+    IMSC at 16#14# range 0..31;
+    RIS  at 16#18# range 0..31;
+    MIS  at 16#1C# range 0..31;
+    ICR  at 16#20# range 0..31;
   end record;
 
 
-  SPI0_Block : aliased SPI0
+  SPI0 : aliased SPI_Peripheral
     with Import, Address => SPI0_Base;
 
-  SPI1_Block : aliased SPI1
+  SPI1 : aliased SPI_Peripheral
     with Import, Address => SPI1_Base;
 
 end Interfaces.LPC1114.SPI;

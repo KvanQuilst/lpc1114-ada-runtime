@@ -17,12 +17,12 @@ package Interfaces.LPC1114.SYST is
 
   -- SysTick Timer Control and Status Register
   type SYST_CSR_Register is record
-    ENABLE : SYST_CSR_ENABLE_Field := 0;
-    TICKINT : SYST_CSR_TICKINT_Field := 0;
-    CLKSOURCE : SYST_CSR_CLKSOURCE_Field := 0;
+    ENABLE : SYST_CSR_ENABLE_Field;
+    TICKINT : SYST_CSR_TICKINT_Field;
+    CLKSOURCE : SYST_CSR_CLKSOURCE_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_3_15 : Interfaces.LPC1114.UInt13;
-    COUNTFLAG : SYST_CSR_COUNTFLAG_Field := 0;
+    COUNTFLAG : SYST_CSR_COUNTFLAG_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_17_31 : Interfaces.LPC1114.UInt15;
   end record
@@ -43,7 +43,7 @@ package Interfaces.LPC1114.SYST is
 
   -- System Timer Reload Value Register
   type SYST_RVR_Register is record
-    RELOAD : SYST_RVR_RELOAD_Field := 0;
+    RELOAD : SYST_RVR_RELOAD_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_24_31 : Interfaces.LPC1114.Byte;
   end record
@@ -60,7 +60,7 @@ package Interfaces.LPC1114.SYST is
 
   -- System Timer Reload Value Register
   type SYST_CVR_Register is record
-    CURRENT : SYST_CVR_CURRENT_Field := 0;
+    CURRENT : SYST_CVR_CURRENT_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_24_31 : Interfaces.LPC1114.Byte;
   end record
@@ -79,10 +79,10 @@ package Interfaces.LPC1114.SYST is
 
   -- System Timer Calibration Value Register
   type SYST_CALIB_Register is record
-    TENMS : SYST_CALIB_TENMS_Field := 16#4#;
+    TENMS : SYST_CALIB_TENMS_Field;
     Reserved_24_29 : Interfaces.LPC1114.UInt6;
-    SKEW : SYST_CALIB_SKEW_Field := 0;
-    NOREF : SYST_CALIB_NOREF_Field := 0;
+    SKEW : SYST_CALIB_SKEW_Field;
+    NOREF : SYST_CALIB_NOREF_Field;
   end record
     with Volatile_Full_Access, Size => 32,
       Bit_Order => System.Low_Order_First;
@@ -95,23 +95,23 @@ package Interfaces.LPC1114.SYST is
   end record;
 
 
-  type SYST is record
-    SYST_CSR   : aliased SYST_CSR_Register;
-    SYST_RVR   : aliased SYST_RVR_Register;
-    SYST_CVR   : aliased SYST_CVR_Register;
-    SYST_CALIB : aliased SYST_CALIB_Register;
+  type SYST_Peripheral is record
+    CSR   : aliased SYST_CSR_Register;
+    RVR   : aliased SYST_RVR_Register;
+    CVR   : aliased SYST_CVR_Register;
+    CALIB : aliased SYST_CALIB_Register;
   end record
     with Volatile;
 
-  for SYST use record
-    SYST_CSR   at 16#00# range 0..31;
-    SYST_RVR   at 16#04# range 0..31;
-    SYST_CVR   at 16#08# range 0..31;
-    SYST_CALIB at 16#0C# range 0..31;
+  for SYST_Peripheral use record
+    CSR   at 16#00# range 0..31;
+    RVR   at 16#04# range 0..31;
+    CVR   at 16#08# range 0..31;
+    CALIB at 16#0C# range 0..31;
   end record;
 
   
-  SYST_Block : aliased SYST
+  SYST : aliased SYST_Peripheral
     with Import, Address => SYST_Base;
 
 end Interfaces.LPC1114.SYST;

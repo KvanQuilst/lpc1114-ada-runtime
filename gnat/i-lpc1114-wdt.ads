@@ -17,10 +17,10 @@ package Interfaces.LPC1114.WDT is
 
   -- Watchdog Mode Register
   type WDMOD_Register is record
-    WDEN : WDMOD_WDEN_Field := 0;
-    WDRESET : WDMOD_WDEN_Field := 0;
-    WDTOF : WDMOD_WDEN_Field := 0;
-    WDINT : WDMOD_WDINT_Field := 0;
+    WDEN : WDMOD_WDEN_Field;
+    WDRESET : WDMOD_WDEN_Field;
+    WDTOF : WDMOD_WDEN_Field;
+    WDINT : WDMOD_WDINT_Field;
     -- DO NOT WRITE 1s TO THESE BITS
     Reserved_4_7 : Interfaces.LPC1114.UInt4;
     Reserved_8_31 : Interfaces.LPC1114.UInt24;
@@ -42,7 +42,7 @@ package Interfaces.LPC1114.WDT is
 
   -- Watchdog Timer Constant Register
   type WDTC_Register is record
-    Count : WDTC_Count_Field := 16#000000FF#;
+    Count : WDTC_Count_Field;
     Reserved_24_31 : Interfaces.LPC1114.Byte;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -75,7 +75,7 @@ package Interfaces.LPC1114.WDT is
 
   -- Watchdog Timer Value Register
   type WDTV_Register is record
-    Count : WDTV_Count_Field := 16#000000FF#;
+    Count : WDTV_Count_Field;
     Reserved_24_31 : Interfaces.LPC1114.Byte;
   end record
     with Volatile_Full_Access, Size => 32,
@@ -87,22 +87,22 @@ package Interfaces.LPC1114.WDT is
   end record;
 
 
-  type WDT is record
-    WDMOD  : aliased WDMOD_Register;
-    WDTC   : aliased WDTC_Register;
-    WDFEED : aliased WDFEED_Register;
-    WDTV   : aliased WDTV_Register;
+  type WDT_Peripheral is record
+    MODR : aliased WDMOD_Register;
+    TC   : aliased WDTC_Register;
+    FEED : aliased WDFEED_Register;
+    TV   : aliased WDTV_Register;
   end record
     with Volatile;
 
-  for WDT use record
-    WDMOD  at 16#0# range 0..31;
-    WDTC   at 16#4# range 0..31;
-    WDFEED at 16#8# range 0..31;
-    WDTV   at 16#C# range 0..31;
+  for WDT_Peripheral use record
+    MODR at 16#0# range 0..31;
+    TC   at 16#4# range 0..31;
+    FEED at 16#8# range 0..31;
+    TV   at 16#C# range 0..31;
   end record;
 
-  WDT_Block : aliased WDT
+  WDT : aliased WDT_Peripheral
     with Import, Address => WDT_Base;
 
 end Interfaces.LPC1114.WDT;
