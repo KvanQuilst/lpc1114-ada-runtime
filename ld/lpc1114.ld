@@ -3,7 +3,9 @@ MEMORY {
   sram (rwx) : org = 0x10000000, len = 4k
 }
 
-ENTRY(__vectors);
+_DEFAULT_STACK_SIZE = 2*1024;
+
+ENTRY(__vectors0);
 
 SECTIONS {
   
@@ -33,9 +35,21 @@ SECTIONS {
 
   .bss (NOLOAD): {
     . = ALIGN(0x8);
+    __bss_start = .;
     *(.bss .bss.*)
     *(COMMON)
     . = ALIGN(0x8);
+    __bss_end = .;
+
+    __interrupt_stack_start = .;
+    *(.interrupt_stacks)
+    . = ALIGN(0x8);
+    __interrupt_stack_end = .;
+
+    __stack_start = .;
+    . += DEFINED (__stack_size) ? __stack_size : _DEFAULT_STACK_SIZE;
+    . = ALIGN(0x8);
+    __stack_end = .;
   } > sram
 
   /* DWARF debug sections.
@@ -67,11 +81,7 @@ SECTIONS {
 	__DATA_LMA = LOADADDR(.data);
 	__DATA_VMA = ADDR(.data);
 	__DATA_END = ADDR(.data) + SIZEOF(.data);
-	__BSS_VMA = ADDR(.bss);
-	__BSS_END = ADDR(.bss) + SIZEOF(.bss);
 }
 
 
-PROVIDE(__INITIAL_SP = ORIGIN(sram) + LENGTH(sram));
-PROVIDE(__VECTOR_CHECKSUM = 0 - __INITIAL_SP - (__reset + 1) - 0
-                          - 0);
+PROVIDE(__VECTOR_CHECKSUM = 0 - __stack_end - (__reset + 1) - 0 - (__hardfault + 1));

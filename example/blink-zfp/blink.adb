@@ -1,11 +1,19 @@
+--
+-- blink.adb
+--
+-- This simple program blinks an LED attached to pin PIO0_9
+-- in the morse code pattern for "Hello World". This program
+-- serves to be an example of how to use and interract with 
+-- the runtime library.
+--
 pragma Style_Checks (off);
 
 pragma Warnings (Off);
 with System;      use System;
-with System.Machine_Code; use System.Machine_Code;
-with Interfaces;  use Interfaces;
-with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
 pragma Warnings (On);
+with Machine_Code; use Machine_Code;
+with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
+with Interrupts;
 
 procedure Blink is
 
@@ -42,8 +50,8 @@ procedure Blink is
 
 begin
 
-  -- Set pins PIO0_7 and PIO1_9 to output
-  GPIO0.DIR.IO7 := 2#1#;
+  -- Set pin PIO1_9 to output
+  GPIO0.DATA (2**7).DATA := 0;
   GPIO1.DIR.IO9 := 2#1#;
   
   loop
@@ -51,17 +59,17 @@ begin
       case Hello_World (I) is
         when 0 =>
           GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          GPIO0.DATA (2**7).DATA := 0;
+          --GPIO0.DATA (2**7).DATA := 0;
           Wait (Dot);          
           GPIO1.DATA (2**9).DATA:= 0;
-          GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
+          --GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 1 =>
           GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          GPIO0.DATA (2**7).DATA := 0;
+          --GPIO0.DATA (2**7).DATA := 0;
           Wait (Dash);
           GPIO1.DATA (2**9).DATA:= 0;
-          GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
+          --GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
           Wait (InDot);
         when 2 =>
           Wait (InChar);

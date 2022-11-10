@@ -26,8 +26,8 @@ default: all
 
 all: zfp ravenscar
 
-zfp: ${ZFP_GNAT_DIR}/i-lpc1114.ads
-	#gprbuild ${GPRBUILD_FLAGS} ${ZFP_BUILD_FLAGS} -P runtime_build.gpr
+zfp: ${ZFP_BUILD_DIR}
+	gprbuild ${GPRBUILD_FLAGS} ${ZFP_BUILD_FLAGS} -P runtime_build.gpr
 
 ravenscar:
 	gprbuild ${GPRBUILD_FLAGS} ${RAVENSCAR_BUILD_FLAGS} -P ravenscar_build.gpr
