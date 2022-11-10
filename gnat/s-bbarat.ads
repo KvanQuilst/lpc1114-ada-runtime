@@ -1,1 +1,0 @@
-../bb-runtimes/src/s-bbarat.ads

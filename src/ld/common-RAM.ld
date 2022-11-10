@@ -1,9 +1,9 @@
-MEMORY {
-  flash (rx) : org = 0x00000000, len = 32k
-  sram (rwx) : org = 0x10000000, len = 4k
-}
+INCLUDE memory-map.ld
 
-_DEFAULT_STACK_SIZE = 2*1024;
+SEARCH_DIR(.)
+__DYNAMIC = 0;
+
+_DEFAULT_STACK_SIZE = 256;
 
 ENTRY(__vectors0);
 
@@ -83,5 +83,4 @@ SECTIONS {
 	__DATA_END = ADDR(.data) + SIZEOF(.data);
 }
 
-
-PROVIDE(__VECTOR_CHECKSUM = 0 - __stack_end - (__reset + 1) - 0 - (__hardfault + 1));
+PROVIDE(__VECTOR_CHECKSUM = 0 - __stack_end - (_start_ram + 1) - 0 - (__hardfault + 1));

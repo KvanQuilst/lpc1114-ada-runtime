@@ -8,7 +8,7 @@
   .align 8
 __vectors0:
 	.word __stack_end		   	/* stack top address */
-	.word	__reset						/* reset function pointer */
+	.word	_start_ram  			/* reset function pointer */
 	.word 0		    					/* NMI */
 	.word __hardfault       /* Hardfault */
 	.word 0, 0, 0						/* Reserved */
@@ -42,8 +42,8 @@ __vectors0:
 
   .text
   .thumb_func
-  .globl __reset
-__reset:
+  .globl _start_ram
+_start_ram:
   /* Copy .data from flash to sram */
   ldr   r0, =__DATA_LMA
   ldr   r1, =__DATA_VMA

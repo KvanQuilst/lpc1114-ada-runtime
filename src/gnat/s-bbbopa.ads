@@ -7,6 +7,6 @@ package System.BB.Board_Parameters is
   --------------------
   -- Hardware Clock --
   --------------------
-  Main_Clock_Frequency : constant := 48_000_000;
+  Clock_Frequency : constant := 48_000_000;
 
 end System.BB.Board_Parameters;
