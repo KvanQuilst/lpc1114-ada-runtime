@@ -10,7 +10,7 @@ __vectors0:
 	.word __stack_end		   	/* stack top address */
 	.word	_start_ram  			/* reset function pointer */
 	.word 0		    					/* NMI */
-	.word __hardfault       /* Hardfault */
+	.word hang              /* Hardfault */
 	.word 0, 0, 0						/* Reserved */
 	.word __VECTOR_CHECKSUM
 	.word 0, 0, 0						/* Reserved */
@@ -44,6 +44,10 @@ __vectors0:
   .thumb_func
   .globl _start_ram
 _start_ram:
+  /* Set stack */
+  ldr   r0, =__stack_end
+  mov   sp, r0
+
   /* Copy .data from flash to sram */
   ldr   r0, =__DATA_LMA
   ldr   r1, =__DATA_VMA
@@ -79,9 +83,10 @@ _start_ram:
 
 
   .thumb_func
+  .globl hang
 hang: b .
 
-
+/*
   .thumb_func
   .global __hardfault
 __hardfault: 
@@ -92,6 +97,7 @@ __hardfault:
 .L1:
   b     hang
   .align 2
+  */
 
  /* Weak Symbols */
   .weak interrupts__hardfault

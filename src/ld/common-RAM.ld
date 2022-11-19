@@ -3,9 +3,9 @@ INCLUDE memory-map.ld
 SEARCH_DIR(.)
 __DYNAMIC = 0;
 
-_DEFAULT_STACK_SIZE = 256;
+_DEFAULT_STACK_SIZE = 512;
 
-ENTRY(__vectors0);
+ENTRY(_start_ram);
 
 SECTIONS {
   
@@ -83,4 +83,4 @@ SECTIONS {
 	__DATA_END = ADDR(.data) + SIZEOF(.data);
 }
 
-PROVIDE(__VECTOR_CHECKSUM = 0 - __stack_end - (_start_ram + 1) - 0 - (__hardfault + 1));
+PROVIDE(__VECTOR_CHECKSUM = 0 - __stack_end - (_start_ram + 1) - 0 - (hang + 1));

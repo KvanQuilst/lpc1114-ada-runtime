@@ -21,7 +21,6 @@ debug:
 	arm-eabi-gdb -ex 'target extended-remote localhost:3333' \
 							 -ex 'monitor reset halt' \
                ${PROGRAM}
-	sleep 1
 	killall openocd
 
 .PHONY: clean

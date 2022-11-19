@@ -6,10 +6,7 @@
 -- serves to be an example of how to use and interract with 
 -- the runtime library.
 --
-pragma Style_Checks (off);
-
-pragma Warnings (Off);
-with System;      use System;
+pragma Style_Checks (off); pragma Warnings (Off); with System;      use System;
 pragma Warnings (On);
 with Machine_Code; use Machine_Code;
 with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
@@ -51,7 +48,7 @@ procedure Blink is
 begin
 
   -- Set pin PIO1_9 to output
-  GPIO0.DATA (2**7).DATA := 0;
+  --GPIO0.DIR.IO7 := 2#1#;
   GPIO1.DIR.IO9 := 2#1#;
   
   loop

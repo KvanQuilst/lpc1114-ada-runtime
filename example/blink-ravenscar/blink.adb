@@ -13,13 +13,12 @@ with System;      use System;
 pragma Warnings (On);
 with Machine_Code; use Machine_Code;
 with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
-with Interrupts;
-
-with Ada.Real_Time;
+with Interrupt;
+--with Ada.Real_Time;
 
 procedure Blink is
 
-  Scale  : constant := 2500;
+  Scale  : constant := 1;
   Dot    : constant := 25 * Scale;
   Dash   : constant := 75 * Scale;
   InDot  : constant := 25 * Scale;
@@ -53,7 +52,6 @@ procedure Blink is
 begin
 
   -- Set pin PIO1_9 to output
-  GPIO0.DATA (2**7).DATA := 0;
   GPIO1.DIR.IO9 := 2#1#;
   
   loop
