@@ -43,7 +43,7 @@ package System.BB.Parameters is
   -- Stacks --
   ------------
   
-  Interrupt_Stack_Size : constant := 64;
+  Interrupt_Stack_Size : constant := 256;
 
   Interrupt_Sec_Stack_Size : constant := 0;
 

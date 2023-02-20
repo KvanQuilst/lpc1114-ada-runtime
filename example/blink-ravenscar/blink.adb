@@ -8,22 +8,24 @@
 --
 pragma Style_Checks (off);
 
+with Ada.Real_Time; use Ada.Real_Time;
+
 pragma Warnings (Off);
 with System;      use System;
 pragma Warnings (On);
 with Machine_Code; use Machine_Code;
+
 with Interfaces.LPC1114.GPIO; use Interfaces.LPC1114.GPIO;
-with Interrupt;
---with Ada.Real_Time;
+--with Interrupt;
 
 procedure Blink is
 
-  Scale  : constant := 1;
-  Dot    : constant := 25 * Scale;
-  Dash   : constant := 75 * Scale;
-  InDot  : constant := 25 * Scale;
-  InChar : constant := 50 * Scale;
-  InWord : constant := 150 * Scale;
+  Scale : constant Time_Span := Milliseconds (150);
+  Dot    : constant Time_Span := Scale;
+  Dash   : constant Time_Span := 3 * Scale;
+  InDot  : constant Time_Span := Scale;
+  InChar : constant Time_Span := 2 * Scale;
+  InWord : constant Time_Span := 6 * Scale;
 
   type Morse is mod 4;
   type Char_Arr is array (Natural range <>) of Morse;
@@ -42,13 +44,6 @@ procedure Blink is
     3           --
     );
 
-  procedure Wait (Time : Integer) is
-  begin
-    for I in 0 .. Time loop
-      Asm ("nop");
-    end loop;
-  end Wait;
-
 begin
 
   -- Set pin PIO1_9 to output
@@ -56,25 +51,22 @@ begin
   
   loop
     for I in Hello_World'Range loop
+
       case Hello_World (I) is
         when 0 =>
           GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          --GPIO0.DATA (2**7).DATA := 0;
-          Wait (Dot);          
+          delay until Clock + Dot;
           GPIO1.DATA (2**9).DATA:= 0;
-          --GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
-          Wait (InDot);
+          delay until Clock + InDot;
         when 1 =>
           GPIO1.DATA (2**9).DATA := GPIO_DATA_Field'Last;
-          --GPIO0.DATA (2**7).DATA := 0;
-          Wait (Dash);
+          delay until Clock + Dash;
           GPIO1.DATA (2**9).DATA:= 0;
-          --GPIO0.DATA (2**7).DATA := GPIO_DATA_Field'Last;
-          Wait (InDot);
+          delay until Clock + InDot;
         when 2 =>
-          Wait (InChar);
+          delay until Clock + InChar;
         when 3 =>
-          Wait (InWord);
+          delay until Clock + InWord;
       end case;
     end loop;
   end loop;

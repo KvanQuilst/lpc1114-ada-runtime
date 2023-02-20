@@ -86,19 +86,6 @@ _start_ram:
   .globl hang
 hang: b .
 
-/*
-  .thumb_func
-  .global __hardfault
-__hardfault: 
-  ldr   r0, =interrupts__hardfault
-  tst   r0, r0
-  beq   .L1
-  blx   r0
-.L1:
-  b     hang
-  .align 2
-  */
-
  /* Weak Symbols */
   .weak interrupts__hardfault
 	.weak SysTick_Handler		/* System Tick */

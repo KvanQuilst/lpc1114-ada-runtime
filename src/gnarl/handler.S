@@ -6,8 +6,7 @@
   .globl __vectors
   .p2align 9
 
-__vectors:
-  /* Cortex-M Core Interrupts */
+__vectors: /* Cortex-M Core Interrupts */
   .word   __INITIAL_SP         /* stack top address */
   .word   fault                /* 1 Reset */
   .word   fault                /* 2 NMI */

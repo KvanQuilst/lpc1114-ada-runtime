@@ -64,7 +64,7 @@ gen_ravenscar () {
 
 build_ravenscar () {
   cd $RAVENSCAR_DIR
-  gprbuild -P ravenscar_build.gpr
+  gprbuild -P ravenscar_build.gpr -cargs -g
 }
 
 if [[ $1 == "zfp" ]]
